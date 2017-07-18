@@ -27,10 +27,34 @@ class Generator(GeneratorBase):
     @classmethod
     def generate_pipeline(cls, source):
         # TODO Add code here
-        meta = source['meta']
-        pipeline_id = '{owner}/{id}'.format(**meta)
+        for item in source:
+            entity_slug = slugify(item['entity'], to_lower=True, separator='_')
+            pipeline_id = '{}/{}'.format(entity_slug, item['year'])
 
-        yield pipeline_id, {
-            'pipeline': [
-            ]
-        }
+            pipeline = [{
+                'run': 'add_metadata',
+                'parameters': {
+                    'name': '{}_{}'.format(entity_slug, item['year']),
+                    'title': 'CRD/IV data for {entity} in the year {year}'.format(**item)
+                }
+            }]
+            for input in item['inputs']:
+                if input['kind'] == 'pdf':
+                    for dimension in input['parameters']['dimensions']:
+                        parameters = {}
+                        parameters['dimensions'] = dimension
+                        parameters['url'] = input['url']
+                        parameters['headers'] = item['model']['headers']
+                        pipeline.append({
+                            'run': 'odtj.tabula-resource',
+                            'parameters': parameters
+                        })
+            # pipeline.append({
+            #     'run': 'dump.to_path',
+            #     'parameters': {
+            #         'out-path': '.'
+            #     }
+            # })
+            yield pipeline_id, {
+                'pipeline': pipeline
+            }
