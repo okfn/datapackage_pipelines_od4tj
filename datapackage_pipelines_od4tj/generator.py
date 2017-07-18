@@ -1,12 +1,10 @@
+# pylama:ignore=E501
 import os
 import json
-import pkgutil
 
 from datapackage_pipelines.generators import (
     GeneratorBase,
-    steps,
     slugify,
-    SCHEDULE_DAILY
 )
 
 import logging
@@ -49,7 +47,7 @@ class Generator(GeneratorBase):
                     'run': 'stream_remote_resources',
                 },
                 {
-                    'run': 'od4tj.prepare-country-fingerprints',
+                    'run': 'od4tj.prepare_country_fingerprints',
                     'parameters': {
                         'resource-name': 'country-codes',
                         'source-fields': ['name', 'official_name_en', 'official_name_fr'],
@@ -84,7 +82,7 @@ class Generator(GeneratorBase):
             })
             pipeline.extend([
                 {
-                    'run': 'od4tj.fingerprint-countries',
+                    'run': 'od4tj.fingerprint_countries',
                     'parameters': {
                         'resource-name': 'crdiv_data',
                         'name-field': 'country',
@@ -102,7 +100,7 @@ class Generator(GeneratorBase):
                         'target': {
                             'name': 'crdiv_data',
                             'key': ['country-name-fingerprint'],
-                            'full': False # Need to set to true!
+                            'full': False  # Need to set to true!
                         },
                         'fields': {
                             'country_name': {
@@ -119,18 +117,18 @@ class Generator(GeneratorBase):
                     }
                 },
                 {
-                    'run': 'set_types',
+                    'run': 'od4tj.fix_numbers',
                 },
                 {
-                    'run': 'od4tj.fix-numbers',
+                    'run': 'set_types',
                 },
             ])
-            # pipeline.append({
-            #     'run': 'dump.to_path',
-            #     'parameters': {
-            #         'out-path': '/tmp'
-            #     }
-            # })
+            pipeline.append({
+                'run': 'dump.to_path',
+                'parameters': {
+                    'out-path': '/tmp'
+                }
+            })
             yield pipeline_id, {
                 'pipeline': pipeline
             }

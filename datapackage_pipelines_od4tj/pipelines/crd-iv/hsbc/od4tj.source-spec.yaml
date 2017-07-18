@@ -36,12 +36,16 @@
     headers:
       - name: country
       - name: turnover
+        type: number
         currency: usd
         factor: 1m
       - name: fte
+        type: number
       - name: profit
+        type: number
         currency: usd
         factor: 1m
       - name: tax_paid
+        type: number
         currency: usd
         factor: 1m

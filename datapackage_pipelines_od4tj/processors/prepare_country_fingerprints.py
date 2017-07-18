@@ -1,5 +1,3 @@
-import logging
-
 from datapackage_pipelines.wrapper import ingest, spew
 from datapackage_pipelines.generators import slugify
 from datapackage_pipelines.utilities.resource_matcher import ResourceMatcher
@@ -48,6 +46,7 @@ def process_datapackage(dp):
                 {'name': name_field, 'type': 'string'},
             ]
     return dp
+
 
 spew(process_datapackage(dp),
      process_resources(res_iter))

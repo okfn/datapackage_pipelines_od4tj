@@ -16,5 +16,6 @@ def modify_datapackage(dp, *_):
     ])
     return dp
 
+
 process(process_row=process_row,
         modify_datapackage=modify_datapackage)
