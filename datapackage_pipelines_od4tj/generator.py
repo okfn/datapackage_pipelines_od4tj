@@ -66,7 +66,7 @@ class Generator(GeneratorBase):
                         parameters['url'] = input['url']
                         parameters['headers'] = item['model']['headers']
                         pipeline.append({
-                            'run': 'od4tj.tabula-resource',
+                            'run': 'od4tj.tabula_resource',
                             'parameters': parameters
                         })
             pipeline.append({
@@ -112,7 +112,7 @@ class Generator(GeneratorBase):
                     }
                 },
                 {
-                    'run': 'od4tj.add-constants',
+                    'run': 'od4tj.add_constants',
                     'parameters': {
                         'year': item['year'],
                         'entity': item['entity']
