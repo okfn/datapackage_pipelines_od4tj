@@ -21,7 +21,6 @@ INSTALL_REQUIRES = [
     'datapackage-pipelines',
     'psycopg2',
     'tabula-py',
-    'fingerprints',
 ]
 TESTS_REQUIRE = [
     'pylama',

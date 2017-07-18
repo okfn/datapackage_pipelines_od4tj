@@ -1,7 +1,7 @@
-import fingerprints
 import logging
 
 from datapackage_pipelines.wrapper import ingest, spew
+from datapackage_pipelines.generators import slugify
 from datapackage_pipelines.utilities.resource_matcher import ResourceMatcher
 
 parameters, dp, res_iter = ingest()
@@ -22,7 +22,7 @@ def process_resource(res):
             if src_value:
                 if name is None:
                     name = src_value
-                fingerprint = fingerprints.generate(src_value)
+                fingerprint = slugify(src_value, to_lower=True)
                 if fingerprint in all_fingerprints:
                     continue
                 all_fingerprints.add(fingerprint)

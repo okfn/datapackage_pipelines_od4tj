@@ -1,7 +1,7 @@
 from datapackage_pipelines.utilities.resource_matcher import ResourceMatcher
 from datapackage_pipelines.wrapper import process
 
-import fingerprints
+from datapackage_pipelines.generators import slugify
 
 
 def process_row(row, row_index,
@@ -9,7 +9,7 @@ def process_row(row, row_index,
                 parameters, stats):
     resource_matcher = ResourceMatcher(parameters['resource-name'])
     if resource_matcher.match(spec['name']):
-        row[parameters['fingerprint-field']] = fingerprints.generate(row[parameters['name-field']])
+        row[parameters['fingerprint-field']] = slugify(row[parameters['name-field']], to_lower=True)
 
     return row
 
