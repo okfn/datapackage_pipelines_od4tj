@@ -1,13 +1,40 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "meta": {
-      "type": "object",
-      "properties": {
-        "owner": {"type": "string"},
-        "id": {"type": "string"},
-        "version": {"type": "integer"}
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "year": {"type": "integer"},
+      "entity": {"type": "string"},
+      "inputs": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "uri": {"type": "string"},
+            "kind": {"type": "string"},
+            "parameters": {"type": "object"}
+          }
+        }
+      },
+      "processing": {
+        "type": "object"
+      },
+      "model": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string"},
+                "currency": {"type": "string"},
+                "factor": {"type": "string"}
+              }
+            }
+          }
+        }
       }
     }
   }

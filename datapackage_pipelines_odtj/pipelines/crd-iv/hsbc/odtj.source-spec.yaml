@@ -1,0 +1,47 @@
+-
+  year: 2016
+  entity: HSBC Holdings
+  inputs:
+    - url: ./170602-the-capital-requirements-country-by-country.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                      {
+                          "page": 3,
+                          "extraction_method": "stream",
+                          "selection_id": "T1500349849399",
+                          "x1": 58.033941192626955,
+                          "x2": 527.5136449432373,
+                          "y1": 109.74367084503174,
+                          "y2": 775.6459447860718,
+                          "width": 469.4797037506104,
+                          "height": 665.9022739410401,
+                          "spec_index": 0
+                      },
+                      {
+                          "page": 4,
+                          "extraction_method": "stream",
+                          "selection_id": "V1500349861737",
+                          "x1": 45.385518112182616,
+                          "x2": 533.465844039917,
+                          "y1": 127.6002681350708,
+                          "y2": 646.9296393203736,
+                          "width": 488.0803259277344,
+                          "height": 519.3293711853028,
+                          "spec_index": 1
+                      }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        currency: usd
+        factor: 1m
+      - name: fte
+      - name: profit
+        currency: usd
+        factor: 1m
+      - name: tax_paid
+        currency: usd
+        factor: 1m

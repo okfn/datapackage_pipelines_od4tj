@@ -20,9 +20,7 @@ NAME = PACKAGE.replace('_', '-')
 INSTALL_REQUIRES = [
     'datapackage-pipelines',
     'psycopg2',
-    'tweepy',
-    'facebook-sdk',
-    'google-api-python-client==1.5.3',
+    'tabula-py',
 ]
 TESTS_REQUIRE = [
     'pylama',
