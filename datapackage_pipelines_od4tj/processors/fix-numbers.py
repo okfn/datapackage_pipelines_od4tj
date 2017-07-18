@@ -9,9 +9,9 @@ def process_row(row, row_index,
             factor = {
                 '1m': 1000000
             }[f['factor']]
-        v = row[f['name']]
-        if v:
-            row[f['name']] = v * factor
+            v = row[f['name']]
+            if v:
+                row[f['name']] = v * factor
     return row
 
 
