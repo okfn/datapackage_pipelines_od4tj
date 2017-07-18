@@ -52,14 +52,14 @@ def modify_datapackage(dp):
     fields = parameters['headers']
     for f in fields:
         if 'type' not in f:
-            if 'factor' in f:
-                f['type'] = 'number'
-                if 'groupChar' not in f:
-                    f['groupChar'] = ','
-            else:
+            # if 'factor' in f:
+            #     f['type'] = 'number'
+            #     if 'groupChar' not in f:
+            #         f['groupChar'] = ','
+            # else:
                 f['type'] = 'string'
     resource = {
-        'name': parameters['dimensions']['selection_id'].lower(),
+        'name': 'tabula-' + parameters['dimensions']['selection_id'].lower(),
         'path': 'data/{}.csv'.format(parameters['dimensions']['selection_id']),
         'schema': {
             'fields': fields

@@ -30,13 +30,34 @@ class Generator(GeneratorBase):
             entity_slug = slugify(item['entity'], to_lower=True, separator='_')
             pipeline_id = '{}/{}'.format(entity_slug, item['year'])
 
-            pipeline = [{
-                'run': 'add_metadata',
-                'parameters': {
-                    'name': '{}_{}'.format(entity_slug, item['year']),
-                    'title': 'CRD/IV data for {entity} in the year {year}'.format(**item)
+            pipeline = [
+                {
+                    'run': 'add_metadata',
+                    'parameters': {
+                        'name': '{}_{}'.format(entity_slug, item['year']),
+                        'title': 'CRD/IV data for {entity} in the year {year}'.format(**item)
+                    },
+                },
+                {
+                    'run': 'add_resource',
+                    'parameters': {
+                        'name': 'country-codes',
+                        'url': 'https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv'
+                    },
+                },
+                {
+                    'run': 'stream_remote_resources',
+                },
+                {
+                    'run': 'od4tj.prepare-country-fingerprints',
+                    'parameters': {
+                        'resource-name': 'country-codes',
+                        'source-fields': ['name', 'official_name_en', 'official_name_fr'],
+                        'name-field': 'name',
+                        'fingerprint-field': 'fingerprint'
+                    }
                 }
-            }]
+            ]
             for input in item['inputs']:
                 if input['kind'] == 'pdf':
                     for dimension in input['parameters']['dimensions']:
@@ -51,6 +72,7 @@ class Generator(GeneratorBase):
             pipeline.append({
                 'run': 'concatenate',
                 'parameters': {
+                    'sources': 'tabula-.+',
                     'target': {
                         'name': 'crdiv_data'
                     },
@@ -62,6 +84,34 @@ class Generator(GeneratorBase):
             })
             pipeline.extend([
                 {
+                    'run': 'od4tj.fingerprint-countries',
+                    'parameters': {
+                        'resource-name': 'crdiv_data',
+                        'name-field': 'country',
+                        'fingerprint-field': 'country-name-fingerprint'
+                    }
+                },
+                {
+                    'run': 'join',
+                    'parameters': {
+                        'source': {
+                            'name': 'country-codes',
+                            'key': ['fingerprint'],
+                            'delete': True
+                        },
+                        'target': {
+                            'name': 'crdiv_data',
+                            'key': ['country-name-fingerprint'],
+                            'full': False # Need to set to true!
+                        },
+                        'fields': {
+                            'country_name': {
+                                'name': 'name'
+                            }
+                        }
+                    }
+                },
+                {
                     'run': 'od4tj.add-constants',
                     'parameters': {
                         'year': item['year'],
@@ -71,13 +121,16 @@ class Generator(GeneratorBase):
                 {
                     'run': 'set_types',
                 },
+                {
+                    'run': 'od4tj.fix-numbers',
+                },
             ])
-            pipeline.append({
-                'run': 'dump.to_path',
-                'parameters': {
-                    'out-path': '/tmp'
-                }
-            })
+            # pipeline.append({
+            #     'run': 'dump.to_path',
+            #     'parameters': {
+            #         'out-path': '/tmp'
+            #     }
+            # })
             yield pipeline_id, {
                 'pipeline': pipeline
             }
