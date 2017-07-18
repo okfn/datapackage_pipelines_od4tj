@@ -22,14 +22,12 @@ INSTALL_REQUIRES = [
     'psycopg2',
     'tabula-py',
 ]
-TESTS_REQUIRE = [
-    'pylama',
+TESTS_REQUIRES = [
     'tox',
 ]
 README = read('README.md')
 VERSION = read(PACKAGE, 'VERSION')
 PACKAGES = find_packages(exclude=['examples', 'tests'])
-
 
 # Run
 setup(
@@ -38,8 +36,8 @@ setup(
     packages=PACKAGES,
     include_package_data=True,
     install_requires=INSTALL_REQUIRES,
-    tests_require=TESTS_REQUIRE,
-    extras_require={'develop': TESTS_REQUIRE},
+    tests_require=TESTS_REQUIRES,
+    extras_require={'develop': TESTS_REQUIRES},
     zip_safe=False,
     long_description=README,
     description='{{ DESCRIPTION }}',
