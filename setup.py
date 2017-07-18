@@ -15,7 +15,7 @@ def read(*paths):
 
 
 # Prepare
-PACKAGE = 'datapackage_pipelines_odtj'
+PACKAGE = 'datapackage_pipelines_od4tj'
 NAME = PACKAGE.replace('_', '-')
 INSTALL_REQUIRES = [
     'datapackage-pipelines',
@@ -44,7 +44,7 @@ setup(
     long_description=README,
     description='{{ DESCRIPTION }}',
     author='DataHQ',
-    url='https://github.com/okfn/datapackage_pipelines_odtj',
+    url='https://github.com/okfn/datapackage_pipelines_od4tj',
     license='MIT',
     keywords=[
         'data',
@@ -62,7 +62,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'odtj-dpp = datapackage_pipelines_odtj.cli:main'
+            'od4tj-dpp = datapackage_pipelines_od4tj.cli:main'
         ]
     }
 )

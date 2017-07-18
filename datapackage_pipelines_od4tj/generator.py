@@ -26,7 +26,6 @@ class Generator(GeneratorBase):
 
     @classmethod
     def generate_pipeline(cls, source):
-        # TODO Add code here
         for item in source:
             entity_slug = slugify(item['entity'], to_lower=True, separator='_')
             pipeline_id = '{}/{}'.format(entity_slug, item['year'])
@@ -46,15 +45,39 @@ class Generator(GeneratorBase):
                         parameters['url'] = input['url']
                         parameters['headers'] = item['model']['headers']
                         pipeline.append({
-                            'run': 'odtj.tabula-resource',
+                            'run': 'od4tj.tabula-resource',
                             'parameters': parameters
                         })
-            # pipeline.append({
-            #     'run': 'dump.to_path',
-            #     'parameters': {
-            #         'out-path': '.'
-            #     }
-            # })
+            pipeline.append({
+                'run': 'concatenate',
+                'parameters': {
+                    'target': {
+                        'name': 'crdiv_data'
+                    },
+                    'fields': dict(
+                        (h['name'], [])
+                        for h in item['model']['headers']
+                    )
+                }
+            })
+            pipeline.extend([
+                {
+                    'run': 'od4tj.add-constants',
+                    'parameters': {
+                        'year': item['year'],
+                        'entity': item['entity']
+                    }
+                },
+                {
+                    'run': 'set_types',
+                },
+            ])
+            pipeline.append({
+                'run': 'dump.to_path',
+                'parameters': {
+                    'out-path': '/tmp'
+                }
+            })
             yield pipeline_id, {
                 'pipeline': pipeline
             }
