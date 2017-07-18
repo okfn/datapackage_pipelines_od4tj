@@ -9,7 +9,9 @@ def process_row(row, row_index,
                 parameters, stats):
     resource_matcher = ResourceMatcher(parameters['resource-name'])
     if resource_matcher.match(spec['name']):
-        row[parameters['fingerprint-field']] = slugify(row[parameters['name-field']], to_lower=True)
+        fingerprint_field = parameters['fingerprint-field']
+        name_field = parameters['name-field']
+        row[fingerprint_field] = slugify(row[name_field], to_lower=True)
 
     return row
 

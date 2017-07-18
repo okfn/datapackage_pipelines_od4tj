@@ -1,3 +1,4 @@
+# pylama:ignore=E501
 import os
 import shutil
 import tempfile
@@ -51,13 +52,7 @@ def tabula_extract(extractor):
 def modify_datapackage(dp):
     fields = parameters['headers']
     for f in fields:
-        if 'type' not in f:
-            # if 'factor' in f:
-            #     f['type'] = 'number'
-            #     if 'groupChar' not in f:
-            #         f['groupChar'] = ','
-            # else:
-                f['type'] = 'string'
+        f['type'] = f.get('type', 'string')
     resource = {
         'name': 'tabula-' + parameters['dimensions']['selection_id'].lower(),
         'path': 'data/{}.csv'.format(parameters['dimensions']['selection_id']),

@@ -1,4 +1,4 @@
-prepare-country-fingerprints
+prepare_country_fingerprints
 --
 {
     "resource-name": "my-resource",
