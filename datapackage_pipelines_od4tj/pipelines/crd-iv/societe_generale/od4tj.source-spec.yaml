@@ -1,0 +1,59 @@
+-
+  year: 2014
+  entity: Société Général
+  inputs:
+    - url: ./ddr2015_amf_13_03_2015_uk.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                      {
+                          "extraction_method": "stream",
+                          "height": 619.7243717193603,
+                          "page": 76,
+                          "selection_id": "K1500317786505",
+                          "spec_index": 1,
+                          "width": 562.039335861206,
+                          "x1": 16.759841499328612,
+                          "x2": 578.7991773605346,
+                          "y1": 108.74408786773681,
+                          "y2": 728.4684595870972
+                      },
+                      {
+                          "extraction_method": "stream",
+                          "height": 353.1259627532959,
+                          "page": 77,
+                          "selection_id": "K1500317844719",
+                          "spec_index": 2,
+                          "width": 575.2913035583496,
+                          "x1": 20.65747905731201,
+                          "x2": 595.9487826156616,
+                          "y1": 87.69684505462646,
+                          "y2": 440.82280780792235
+                      }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: full_time_equivalents
+        type: number
+      - name: net_banking_income
+        type: number
+        currency: eur
+        factor: 1m
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1m
+      - name: deferred_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1m
