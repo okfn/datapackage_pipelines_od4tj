@@ -34,15 +34,24 @@ def fetch_pdf_file():
 
 def tabula_extract(extractor):
     filename = next(extractor)
+    tabula_params = {
+        'guess': False,
+        'output_format': 'json',
+    }
     dimensions = parameters['dimensions']
-    pages = dimensions['page']
-    area = [
+    tabula_params['pages'] = dimensions['page']
+    # Warning: `spreadsheet=False` doesn't have the same effect as `nospreadsheet=True`
+    if dimensions.get('extraction_method') == 'lattice':
+        tabula_params['spreadsheet'] = True
+    else:
+        tabula_params['nospreadsheet'] = True
+    tabula_params['area'] = [
         dimensions['y1'],
         dimensions['x1'],
         dimensions['y2'],
         dimensions['x2'],
     ]
-    r = tabula.read_pdf(filename, pages=pages, area=area, output_format='json', guess=False)
+    r = tabula.read_pdf(filename, **tabula_params)
     data = r[0]['data']
     data = [dict(zip(header_names, [cell['text'] for cell in row])) for row in data]
     list(extractor)

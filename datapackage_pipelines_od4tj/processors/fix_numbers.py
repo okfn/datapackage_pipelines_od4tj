@@ -28,7 +28,7 @@ def process_row(row, row_index,
             else:
                 value = _apply_factor(value, field.get('factor'))
 
-        logging.warn('Processing "{}" with value "{}". Altering to "{}"'.format(
+        logging.warn('Processing "{}" with value "{}".Altering to "{}"'.format(
             name,
             original_value,
             value
