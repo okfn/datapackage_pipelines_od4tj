@@ -100,13 +100,13 @@ class Generator(GeneratorBase):
                         'target': {
                             'name': 'crdiv_data',
                             'key': ['country-name-fingerprint'],
-                            'full': False  # Need to set to true!
                         },
                         'fields': {
                             'country_name': {
                                 'name': 'name'
                             }
-                        }
+                        },
+                        'full': False,
                     }
                 },
                 {
