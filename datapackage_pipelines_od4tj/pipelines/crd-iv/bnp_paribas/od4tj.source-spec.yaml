@@ -1,0 +1,61 @@
+-
+  year: 2014
+  entity: BNP Paribas
+  inputs:
+    - url: ./ddr_2014_gb.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                        {
+                            "extraction_method": "stream",
+                            "height": 486.6381307983399,
+                            "page": 488,
+                            "selection_id": "Y1500448029091",
+                            "spec_index": 0,
+                            "width": 235.1340203857422,
+                            "x1": 68.08469261169434,
+                            "x2": 303.2187129974365,
+                            "y1": 190.86036781311037,
+                            "y2": 677.4984986114503
+                        },
+                        {
+                            "extraction_method": "stream",
+                            "height": 252.24820541381837,
+                            "page": 488,
+                            "selection_id": "P1500448040115",
+                            "spec_index": 1,
+                            "width": 235.8781153869629,
+                            "x1": 319.588803024292,
+                            "x2": 555.4669184112549,
+                            "y1": 191.60446281433107,
+                            "y2": 443.8526682281494
+                        }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1m
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1m
+      - name: income_before_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1m
+      - name: deferred_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: corporation_tax_paid
+        type: number
+        currency: eur
+        factor: 1m

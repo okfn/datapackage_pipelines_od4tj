@@ -1,0 +1,51 @@
+-
+  year: 2014
+  entity: Groupe BPCE
+  inputs:
+    - url: ./Groupe BPCE - DDR 2014 - VGB - VDEF.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                      {
+                          "extraction_method": "stream",
+                          "height": 571.6237534332275,
+                          "page": 308,
+                          "selection_id": "Y1500355034305",
+                          "spec_index": 0,
+                          "width": 536.545029373169,
+                          "x1": 49.03048931121826,
+                          "x2": 585.5755186843872,
+                          "y1": 160.24598945617677,
+                          "y2": 731.8697428894043
+                      },
+                      {
+                          "extraction_method": "stream",
+                          "height": 399.41910804748534,
+                          "page": 309,
+                          "selection_id": "G1500355061633",
+                          "spec_index": 1,
+                          "width": 533.3560544586181,
+                          "x1": 53.01670795440674,
+                          "x2": 586.3727624130249,
+                          "y1": 106.83065963745118,
+                          "y2": 506.24976768493656
+                      }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: net_banking_income
+        type: number
+        currency: eur
+        factor: 1m
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: income_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: full_time_equivalents
+        type: number

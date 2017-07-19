@@ -1,0 +1,47 @@
+-
+  year: 2014
+  entity: Santander
+  inputs:
+    - url: ./529-416-ejercicio2014gb.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                      {
+                          "extraction_method": "stream",
+                          "height": 478.89,
+                          "page": 711,
+                          "selection_id": "E1500327680454",
+                          "spec_index": 0,
+                          "width": 556.155,
+                          "x1": 16.4475,
+                          "x2": 572.6025,
+                          "y1": 79.1775,
+                          "y2": 558.0675
+                      }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1m
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax_2014
+        type: number
+        currency: eur
+        factor: 1m
+      - name: tax_on_profit_2014
+        type: number
+        currency: eur
+        factor: 1m
+      - name: profit_before_tax_2013
+        type: number
+        currency: eur
+        factor: 1m
+      - name: tax_on_profit_2013
+        type: number
+        currency: eur
+        factor: 1m

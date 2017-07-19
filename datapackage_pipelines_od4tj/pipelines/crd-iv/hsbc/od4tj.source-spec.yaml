@@ -39,13 +39,13 @@
         type: number
         currency: usd
         factor: 1m
-      - name: fte
+      - name: full_time_equivalents
         type: number
-      - name: profit
+      - name: profit_before_tax
         type: number
         currency: usd
         factor: 1m
-      - name: tax_paid
+      - name: total_tax_paid
         type: number
         currency: usd
         factor: 1m

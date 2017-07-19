@@ -1,0 +1,39 @@
+-
+  year: 2014
+  entity: Deutsche Bank
+  inputs:
+    - url: ./Deutsche_Bank_Financial_Report_2014.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                      {
+                          "extraction_method": "stream",
+                          "height": 613.0765698242187,
+                          "page": 449,
+                          "selection_id": "O1500325299535",
+                          "spec_index": 0,
+                          "width": 450.13510284423825,
+                          "x1": 47.98961013793945,
+                          "x2": 498.1247129821777,
+                          "y1": 88.16695816040038,
+                          "y2": 701.2435279846192
+                      }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1m
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1m
+      - name: income_tax
+        type: number
+        currency: eur
+        factor: 1m
