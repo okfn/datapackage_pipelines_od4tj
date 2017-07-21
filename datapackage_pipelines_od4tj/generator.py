@@ -126,7 +126,7 @@ class Generator(GeneratorBase):
             pipeline.append({
                 'run': 'dump.to_path',
                 'parameters': {
-                    'out-path': '/tmp'
+                    'out-path': '/tmp/od4tj/'+pipeline_id
                 }
             })
             yield pipeline_id, {

@@ -1,0 +1,21 @@
+concatenate:
+  pipeline:
+    - run: add_metadata
+      parameters:
+        name: all_crd_iv_data
+    - run: od4tj.collect_sources
+      parameters:
+        base_path: /tmp/od4tj/
+    - run: stream_remote_resources
+    - run: concatenate
+      parameters:
+        fields:
+          country: []
+          entity: []
+          year: []
+          full_time_equivalents: []
+          profit_before_tax: []
+          total_tax_paid: []
+    - run: dump.to_path
+      parameters:
+        out-path: /tmp/od4tj-concat
