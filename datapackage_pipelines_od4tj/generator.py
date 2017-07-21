@@ -124,9 +124,10 @@ class Generator(GeneratorBase):
                 },
             ])
             pipeline.append({
-                'run': 'dump.to_path',
+                'run': 'aws.dump.to_s3',
                 'parameters': {
-                    'out-path': '/tmp/od4tj/'+pipeline_id
+                    'bucket': 'od4tj',
+                    'path': 'crd_iv_datapackages/{}_{}'.format(entity_slug, item['year'])
                 }
             })
             yield pipeline_id, {
