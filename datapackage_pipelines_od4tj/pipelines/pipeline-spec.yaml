@@ -3,19 +3,41 @@ concatenate:
     - run: add_metadata
       parameters:
         name: all_crd_iv_data
+        title: CRD/IV data extracted from PDF tables
     - run: od4tj.collect_sources
       parameters:
-        base_path: /tmp/od4tj/
+        bucket: od4tj
+        path: crd_iv_datapackages/
     - run: stream_remote_resources
     - run: concatenate
       parameters:
+        target:
+          name: all_crd_iv_data
+          path: data/all_crd_iv_data.csv
         fields:
-          country: []
           entity: []
           year: []
-          full_time_equivalents: []
-          profit_before_tax: []
+          country: []
+          revenues: []
+          turnover: []
+          net_banking_income: []
+          profit_before_tax: ['profit_before_tax_2014']
+          income_before_tax: []
           total_tax_paid: []
-    - run: dump.to_path
+          income_tax: []
+          tax_on_profit: ['tax_on_profit_2014']
+          corporation_tax_paid: []
+          deferred_tax: []
+          subsidies: []
+          full_time_equivalents: []
+    - run: dump.to_sql
       parameters:
-        out-path: /tmp/od4tj-concat
+        engine: env://DPP_DB_ENGINE
+        tables:
+          all_crd_iv:
+            resource-name: all_crd_iv_data
+            mode: rewrite
+    - run: aws.dump.to_s3
+      parameters:
+          bucket: od4tj
+          path: all_crd_iv
