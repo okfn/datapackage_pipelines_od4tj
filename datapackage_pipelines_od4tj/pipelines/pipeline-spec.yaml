@@ -6,7 +6,7 @@ concatenate:
         title: CRD/IV data extracted from PDF tables
     - run: od4tj.collect_sources
       parameters:
-        bucket: od4tj
+        bucket: od4tj-store.ofkn.org
         path: crd_iv_datapackages/
     - run: stream_remote_resources
     - run: concatenate
