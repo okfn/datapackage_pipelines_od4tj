@@ -126,7 +126,7 @@ class Generator(GeneratorBase):
             pipeline.append({
                 'run': 'aws.dump.to_s3',
                 'parameters': {
-                    'bucket': 'od4tj',
+                    'bucket': 'od4tj-store.ofkn.org',
                     'path': 'crd_iv_datapackages/{}_{}'.format(entity_slug, item['year'])
                 }
             })
