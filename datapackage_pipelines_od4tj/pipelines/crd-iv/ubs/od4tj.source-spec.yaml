@@ -1,0 +1,65 @@
+  # Year
+  year: 2015
+  # EntityName
+  entity: UBS
+  inputs:
+    # Path to the PDF you uploaded in the project
+    - url: ./2015_ubs.pdf
+      kind: pdf
+      parameters:
+        # Paste the dimensions of the selection you made in Tabula
+        dimensions: 
+                [
+                  {
+                    "page": 1,
+                    "extraction_method": "stream",
+                    "selection_id": "I1500902853135",
+                    "x1": 36.463350448608395,
+                    "x2": 555.135906829834,
+                    "y1": 236.63970291137693,
+                    "y2": 370.58670455932617,
+                    "width": 518.6725563812256,
+                    "height": 133.9470016479492,
+                    "spec_index": 0
+                  },
+                  {
+                    "page": 1,
+                    "extraction_method": "stream",
+                    "selection_id": "T1500902858031",
+                    "x1": 38.69580047607422,
+                    "x2": 555.135906829834,
+                    "y1": 380.26065467834474,
+                    "y2": 514.2076563262939,
+                    "width": 516.4401063537597,
+                    "height": 133.9470016479492,
+                    "spec_index": 1
+                  }
+                ]
+
+  processing: {}
+  model:
+    # Define the fields of the table in order they appear in the table
+    headers:
+      # `string` type is default
+      - name: country
+      - name: turnover
+        type: number
+        currency:gbp
+        factor: 1000
+      - name: profit_before_tax
+        type: number
+        currency: gbp
+        factor: 1000
+      - name: consolidation_eliminations
+        type: number
+        currency: gbp
+        factor: 1000
+      - name: profit_before_tax_consolidated
+        type: number
+        currency: gbp
+        factor: 1000
+      - name: corporation_tax_paid
+        type: number
+        factor:1000
+      - name: employees
+        type: number    
