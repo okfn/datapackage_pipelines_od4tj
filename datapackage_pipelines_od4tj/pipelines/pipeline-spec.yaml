@@ -19,18 +19,29 @@ concatenate:
           entity: []
           year: []
           country: []
+
           revenues: []
-          turnover: []
-          net_banking_income: []
-          profit_before_tax: ['profit_before_tax_2014']
-          income_before_tax: []
-          total_tax_paid: []
-          income_tax: []
-          tax_on_profit: ['tax_on_profit_2014']
-          corporation_tax_paid: []
-          deferred_tax: []
+          turnover: ['net_banking_income', 'income', 'income_before_tax']
+          total_tax_paid: ['corporation_tax_paid', 'income_tax', 'tax_on_profit', 'tax_on_profit_2014']
           subsidies: []
           full_time_equivalents: []
+
+          profit_before_tax: ['profit_before_tax_2014']
+          deferred_tax: []
+
+    - run: set_types
+      parameters:
+        types:
+          revenues: {'type': 'number'}
+          turnover: {'type': 'number'}
+          total_tax_paid: {'type': 'number'}
+          subsidies: {'type': 'number'}
+          full_time_equivalents: {'type': 'number'}
+
+          profit_before_tax: {'type': 'number'}
+          deferred_tax: {'type': 'number'}
+
+
     - run: dump.to_sql
       parameters:
         engine: env://DPP_DB_ENGINE

@@ -79,7 +79,9 @@ def _convert_to_number(value, group_char=','):
 def _apply_factor(value, factor):
     if value and factor:
         multiplier = {
-            '1m': 1000000
+            '1m': 1000000,
+            '1k': 1000,
+            '1':  1,
         }[factor]
         value *= multiplier
 

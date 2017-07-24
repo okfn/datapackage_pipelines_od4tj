@@ -1,0 +1,417 @@
+-
+  year: 2014
+  entity: Unicredit
+  inputs:
+    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
+      kind: pdf
+      transpose: true
+      parameters:
+        dimensions:  [
+                    {
+                    "page": 2,
+                    "extraction_method": "lattice",
+                    "selection_id": "N1500903070518",
+                    "x1": 40.00399020599369,
+                    "x2": 502.7875174276734,
+                    "y1": 103.55339440307621,
+                    "y2": 242.68606255493168,
+                    "width": 462.78352722167966,
+                    "height": 139.13266815185546
+                    },
+                    {
+                    "page": 2,
+                    "extraction_method": "lattice",
+                    "selection_id": "K1500903070540",
+                    "x1": 40.00399020599369,
+                    "x2": 502.7875174276734,
+                    "y1": 255.5576944213867,
+                    "y2": 391.71426271972655,
+                    "width": 462.78352722167966,
+                    "height": 136.15656829833983
+                    },
+                    {
+                    "page": 2,
+                    "extraction_method": "lattice",
+                    "selection_id": "Q1500903070552",
+                    "x1": 40.00399020599369,
+                    "x2": 502.7875174276734,
+                    "y1": 405.55312703857413,
+                    "y2": 538.7335954833984,
+                    "width": 462.78352722167966,
+                    "height": 133.1804684448242
+                    },
+                    {
+                    "page": 2,
+                    "extraction_method": "lattice",
+                    "selection_id": "L1500903070564",
+                    "x1": 40.00399020599369,
+                    "x2": 181.3687332479859,
+                    "y1": 551.5605858520507,
+                    "y2": 685.4850792602539,
+                    "width": 141.36474304199217,
+                    "height": 133.92449340820312
+                    }
+                    ]
+                    {
+                    "extraction_method": "stream",
+                    "height": 446.26,
+                    "page": 4,
+                    "selection_id": "M1500294534993",
+                    "spec_index": 0,
+                    "width": 779.9025,
+                    "x1": 33.15375,
+                    "x2": 813.05625,
+                    "y1": 65.78125,
+                    "y2": 512.04125
+                    },
+                    {
+                    "extraction_method": "stream",
+                    "height": 446.26,
+                    "page": 5,
+                    "selection_id": "F1500294537181",
+                    "spec_index": 1,
+                    "width": 779.9025,
+                    "x1": 33.15375,
+                    "x2": 813.05625,
+                    "y1": 65.78125,
+                    "y2": 512.04125
+                    },
+                    {
+                    "extraction_method": "stream",
+                    "height": 303.12,
+                    "page": 6,
+                    "selection_id": "R1500294537195",
+                    "spec_index": 2,
+                    "width": 788.3225,
+                    "x1": 33.15375,
+                    "x2": 821.4762499999999,
+                    "y1": 65.78125,
+                    "y2": 368.90125
+                    }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1k
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1k
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1k
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1k
+
+-
+  year: 2014
+  entity: Unicredit
+  subsidiary: banks
+  inputs:
+    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
+      kind: pdf
+      transpose: true
+      parameters:
+        dimensions:  [
+                        {
+                            "page": 2,
+                            "extraction_method": "lattice",
+                            "selection_id": "S1500904599861",
+                            "x1": 40.00399020599369,
+                            "x2": 502.7875174276734,
+                            "y1": 103.55339440307621,
+                            "y2": 242.68606255493168,
+                            "width": 462.78352722167966,
+                            "height": 139.13266815185546
+                        },
+                        {
+                            "page": 2,
+                            "extraction_method": "lattice",
+                            "selection_id": "U1500904599888",
+                            "x1": 40.00399020599369,
+                            "x2": 502.7875174276734,
+                            "y1": 255.5576944213867,
+                            "y2": 391.71426271972655,
+                            "width": 462.78352722167966,
+                            "height": 136.15656829833983
+                        },
+                        {
+                            "page": 2,
+                            "extraction_method": "lattice",
+                            "selection_id": "P1500904599909",
+                            "x1": 40.00399020599369,
+                            "x2": 502.7875174276734,
+                            "y1": 405.55312703857413,
+                            "y2": 538.7335954833984,
+                            "width": 462.78352722167966,
+                            "height": 133.1804684448242
+                        },
+                        {
+                            "page": 2,
+                            "extraction_method": "lattice",
+                            "selection_id": "N1500904599926",
+                            "x1": 40.00399020599369,
+                            "x2": 181.3687332479859,
+                            "y1": 551.5605858520507,
+                            "y2": 685.4850792602539,
+                            "width": 141.36474304199217,
+                            "height": 133.92449340820312
+                        },
+                        {
+                            "page": 3,
+                            "extraction_method": "lattice",
+                            "selection_id": "N1500904610727",
+                            "x1": 37.94527313232422,
+                            "x2": 515.6092996215821,
+                            "y1": 72.17042144775391,
+                            "y2": 210.55906463623046,
+                            "width": 477.6640264892578,
+                            "height": 138.38864318847655
+                        },
+                        {
+                            "page": 3,
+                            "extraction_method": "lattice",
+                            "selection_id": "B1500904615576",
+                            "x1": 29.760998535156247,
+                            "x2": 529.7457739257812,
+                            "y1": 215.7672393798828,
+                            "y2": 351.1797827148437,
+                            "width": 499.984775390625,
+                            "height": 135.41254333496093
+                        },
+                        {
+                            "page": 3,
+                            "extraction_method": "lattice",
+                            "selection_id": "E1500904620121",
+                            "x1": 39.43332305908203,
+                            "x2": 188.98234069824218,
+                            "y1": 356.3879574584961,
+                            "y2": 485.84830108642575,
+                            "width": 149.54901763916016,
+                            "height": 129.4603436279297
+                        }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1k
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1k
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1k
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1k
+
+-
+  year: 2014
+  entity: Unicredit
+  subsidiary: financial-institutions
+  inputs:
+    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
+      kind: pdf
+      transpose: true
+      parameters:
+        dimensions:  [
+                        {
+                            "page": 4,
+                            "extraction_method": "lattice",
+                            "selection_id": "J1500904953814",
+                            "x1": 38.68929809570312,
+                            "x2": 505.19295013427734,
+                            "y1": 76.63457122802734,
+                            "y2": 203.8628399658203,
+                            "width": 466.5036520385742,
+                            "height": 127.22826873779296
+                        },
+                        {
+                            "page": 4,
+                            "extraction_method": "lattice",
+                            "selection_id": "W1500904976117",
+                            "x1": 33.48112335205078,
+                            "x2": 510.40112487792965,
+                            "y1": 206.09491485595703,
+                            "y2": 338.5313583374023,
+                            "width": 476.9200015258789,
+                            "height": 132.4364434814453
+                        },
+                        {
+                            "page": 4,
+                            "extraction_method": "lattice",
+                            "selection_id": "D1500904982315",
+                            "x1": 36.45722320556641,
+                            "x2": 479.8961013793945,
+                            "y1": 340.76343322753905,
+                            "y2": 476.17597656249995,
+                            "width": 443.43887817382813,
+                            "height": 135.41254333496093
+                        },
+                        {
+                            "page": 6,
+                            "extraction_method": "stream",
+                            "selection_id": "I1500904968458",
+                            "x1": 38.68929809570312,
+                            "x2": 505.19295013427734,
+                            "y1": 76.63457122802734,
+                            "y2": 203.8628399658203,
+                            "width": 466.5036520385742,
+                            "height": 127.22826873779296
+                        }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1k
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1k
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1k
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1k
+
+-
+  year: 2014
+  entity: Unicredit
+  subsidiary: insurance
+  inputs:
+    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
+      kind: pdf
+      transpose: true
+      parameters:
+        dimensions:  [
+                         {
+                             "page": 5,
+                             "extraction_method": "stream",
+                             "selection_id": "X1500905217727",
+                             "x1": 31.24904846191406,
+                             "x2": 279.00936126708984,
+                             "y1": 71.426396484375,
+                             "y2": 207.58296478271484,
+                             "width": 247.76031280517577,
+                             "height": 136.15656829833983
+                         },
+                         {
+                             "page": 6,
+                             "extraction_method": "stream",
+                             "selection_id": "D1500905217789",
+                             "x1": 38.68929809570312,
+                             "x2": 505.19295013427734,
+                             "y1": 76.63457122802734,
+                             "y2": 203.8628399658203,
+                             "width": 466.5036520385742,
+                             "height": 127.22826873779296
+                         }
+                     ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1k
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1k
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1k
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1k
+
+
+-
+  year: 2014
+  entity: Unicredit
+  subsidiary: non-financial-institutions
+  inputs:
+    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
+      kind: pdf
+      transpose: true
+      parameters:
+        dimensions: [
+                        {
+                            "page": 5,
+                            "extraction_method": "stream",
+                            "selection_id": "T1500905378771",
+                            "x1": 33.48112335205078,
+                            "x2": 502.9608752441406,
+                            "y1": 217.9993142700195,
+                            "y2": 340.0194082641601,
+                            "width": 469.47975189208984,
+                            "height": 122.02009399414062
+                        },
+                        {
+                            "page": 5,
+                            "extraction_method": "stream",
+                            "selection_id": "X1500905384934",
+                            "x1": 33.48112335205078,
+                            "x2": 344.4835580444336,
+                            "y1": 346.7156329345703,
+                            "y2": 466.5036520385742,
+                            "width": 311.0024346923828,
+                            "height": 119.78801910400391
+                        }
+                    ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: turnover
+        type: number
+        currency: eur
+        factor: 1k
+      - name: full_time_equivalents
+        type: number
+      - name: profit_before_tax
+        type: number
+        currency: eur
+        factor: 1k
+      - name: total_tax_paid
+        type: number
+        currency: eur
+        factor: 1k
+      - name: subsidies
+        type: number
+        currency: eur
+        factor: 1k
+
+
