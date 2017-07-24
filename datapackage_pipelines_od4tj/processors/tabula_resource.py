@@ -56,6 +56,9 @@ def tabula_extract(extractor):
     data = [[cell['text'] for cell in row] for row in data]
     if parameters['transpose']:
         data = list(map(list, zip(*data)))
+    if parameters['skip_empty_cells']:
+        data = [[x for x in row if x] for row in data]
+        data = [row for row in data if row]
     data = [dict(zip(header_names, row)) for row in data]
     list(extractor)
     return data

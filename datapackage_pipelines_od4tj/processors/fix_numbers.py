@@ -22,7 +22,7 @@ def process_row(row, row_index,
 
         if value:
             try:
-                value = _convert_to_number(value, field.get('groupChar'))
+                value = _convert_to_number(value, field.get('groupChar'), field.get('decimalChar'))
             except (ValueError, AttributeError):
                 value = None
             else:
@@ -64,9 +64,9 @@ def _remove_null_values(value):
     return value
 
 
-def _convert_to_number(value, group_char=','):
+def _convert_to_number(value, group_char=',', decimal_char='.'):
     if isinstance(value, str):
-        value = value.replace(group_char or ',', '').replace(',', '.')
+        value = value.replace(group_char or ',', '').replace(decimal_char or '.', '.')
 
     numeric_value = float(value)
 

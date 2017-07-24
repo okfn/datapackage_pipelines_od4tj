@@ -66,6 +66,7 @@ class Generator(GeneratorBase):
                         parameters = {}
                         parameters['dimensions'] = dimension
                         parameters['transpose'] = input.get('transpose', False)
+                        parameters['skip_empty_cells'] = input.get('skip_empty_cells', False)
                         parameters['url'] = input['url']
                         parameters['headers'] = item['model']['headers']
                         pipeline.append({
@@ -137,6 +138,12 @@ class Generator(GeneratorBase):
                 'parameters': {
                     'bucket': 'od4tj-filestore.okfn.org',
                     'path': 'crd_iv_datapackages/{}_{}'.format(entity_slug, item['year'])
+                }
+            })
+            pipeline.append({
+                'run': 'dump.to_path',
+                'parameters': {
+                    'out-path': '/tmp/',
                 }
             })
             yield pipeline_id, {
