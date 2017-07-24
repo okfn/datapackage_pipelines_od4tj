@@ -61,6 +61,7 @@ class Generator(GeneratorBase):
                     for dimension in input['parameters']['dimensions']:
                         parameters = {}
                         parameters['dimensions'] = dimension
+                        parameters['transpose'] = input.get('transpose', False)
                         parameters['url'] = input['url']
                         parameters['headers'] = item['model']['headers']
                         pipeline.append({
@@ -113,7 +114,8 @@ class Generator(GeneratorBase):
                     'run': 'od4tj.add_constants',
                     'parameters': {
                         'year': item['year'],
-                        'entity': item['entity']
+                        'entity': item['entity'],
+                        'subsidiary': item.get('subsidiary')
                     }
                 },
                 {

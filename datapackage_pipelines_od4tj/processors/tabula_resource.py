@@ -53,7 +53,10 @@ def tabula_extract(extractor):
     ]
     r = tabula.read_pdf(filename, **tabula_params)
     data = r[0]['data']
-    data = [dict(zip(header_names, [cell['text'] for cell in row])) for row in data]
+    data = [[cell['text'] for cell in row] for row in data]
+    if parameters['transpose']:
+        data = list(map(list, zip(*data)))
+    data = [dict(zip(header_names, row)) for row in data]
     list(extractor)
     return data
 

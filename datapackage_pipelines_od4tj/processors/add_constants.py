@@ -6,6 +6,7 @@ def process_row(row, row_index,
                 parameters, stats):
     row['year'] = parameters['year']
     row['entity'] = parameters['entity']
+    row['subsidiary'] = parameters.get('subsidiary')
     return row
 
 
@@ -13,6 +14,7 @@ def modify_datapackage(dp, *_):
     dp['resources'][0]['schema']['fields'].extend([
         {'name': 'year',   'type': 'integer'},
         {'name': 'entity', 'type': 'string'},
+        {'name': 'subsidiary', 'type': 'string'},
     ])
     return dp
 
