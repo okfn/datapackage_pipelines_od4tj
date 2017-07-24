@@ -39,5 +39,5 @@ concatenate:
             mode: rewrite
     - run: aws.dump.to_s3
       parameters:
-          bucket: od4tj
+          bucket: od4tj-filestore.okfn.org
           path: all_crd_iv
