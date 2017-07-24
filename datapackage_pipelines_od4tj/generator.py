@@ -27,12 +27,16 @@ class Generator(GeneratorBase):
         for item in source:
             entity_slug = slugify(item['entity'], to_lower=True, separator='_')
             pipeline_id = '{}/{}'.format(entity_slug, item['year'])
+            dataset_name = '{}_{}'.format(entity_slug, item['year'])
+            if 'subsidiary' in item:
+                pipeline_id += '/{}'.format(item['subsidiary'])
+                dataset_name += '_{}'.format(item['subsidiary'])
 
             pipeline = [
                 {
                     'run': 'add_metadata',
                     'parameters': {
-                        'name': '{}_{}'.format(entity_slug, item['year']),
+                        'name': dataset_name,
                         'title': 'CRD/IV data for {entity} in the year {year}'.format(**item)
                     },
                 },
