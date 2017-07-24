@@ -106,7 +106,7 @@ class Generator(GeneratorBase):
                                 'name': 'name'
                             }
                         },
-                        'full': False,
+                        'full': True,
                     }
                 },
                 {
@@ -115,6 +115,9 @@ class Generator(GeneratorBase):
                         'year': item['year'],
                         'entity': item['entity']
                     }
+                },
+                {
+                    'run': 'od4tj.validate_countries'
                 },
                 {
                     'run': 'od4tj.fix_numbers',

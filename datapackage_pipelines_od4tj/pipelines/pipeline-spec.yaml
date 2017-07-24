@@ -8,6 +8,7 @@ concatenate:
       parameters:
         bucket: od4tj-filestore.okfn.org
         path: crd_iv_datapackages/
+        suffix: crdiv_data.csv
     - run: stream_remote_resources
     - run: concatenate
       parameters:
@@ -41,3 +42,32 @@ concatenate:
       parameters:
           bucket: od4tj-filestore.okfn.org
           path: all_crd_iv
+
+concatenate-missing-countries:
+  pipeline:
+    - run: add_metadata
+      parameters:
+        name: missing_countries_from_crdiv_data
+        title: Country mismatches from CRD/IV data
+    - run: od4tj.collect_sources
+      parameters:
+        bucket: od4tj-filestore.okfn.org
+        path: crd_iv_datapackages/
+        suffix: missing-countries.csv
+    - run: stream_remote_resources
+    - run: concatenate
+      parameters:
+        target:
+          name: all_missing_countries
+          path: data/all_missing_countries.csv
+        fields:
+          entity: []
+          year: []
+          missing-country: []
+    - run: dump.to_sql
+      parameters:
+        engine: env://DPP_DB_ENGINE
+        tables:
+          all_missing_data:
+            resource-name: all_missing_countries
+            mode: rewrite
