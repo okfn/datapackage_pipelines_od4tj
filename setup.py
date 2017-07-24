@@ -21,6 +21,7 @@ INSTALL_REQUIRES = [
     'datapackage-pipelines',
     'psycopg2',
     'tabula-py',
+    'boto',
     'datapackage-pipelines-aws',
 ]
 TESTS_REQUIRES = [

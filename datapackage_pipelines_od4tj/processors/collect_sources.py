@@ -2,14 +2,12 @@ import boto3
 import logging
 
 from boto import connect_s3
-from botocore import client
 from boto.s3.connection import OrdinaryCallingFormat
 from datapackage_pipelines.wrapper import ingest, spew
 
 params, dp, res_iter = ingest()
 dp.setdefault('resources', [])
 
-# s3client = boto3.client('s3', config={'calling_format': OrdinaryCallingFormat()})
 conn = connect_s3(
     is_secure=True,               # require ssl
     calling_format = OrdinaryCallingFormat(),
