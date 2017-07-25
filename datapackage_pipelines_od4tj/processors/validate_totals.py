@@ -24,7 +24,8 @@ def process_resource(rows):
 
     for f in total_fields:
         assert abs(totals[f] - expected_totals[f]) <= ERROR_MARGIN, \
-                "%r: Expected total of %s, got %s instead" % (f, expected_totals[f], totals[f])
+                "%r: Expected total of %s, got %s instead" % \
+                (f, expected_totals[f], totals[f])
 
 
 def process_resources(resources):

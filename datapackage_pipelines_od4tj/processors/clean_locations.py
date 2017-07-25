@@ -6,12 +6,14 @@ from datapackage_pipelines.wrapper import process
 
 
 all_country_names = [country.name for country in pycountry.countries]
-all_country_initials = [(''.join(part[0] for part in country.name.lower().split()),
+all_country_initials = [(''.join(part[0]
+                                 for part in country.name.lower().split()),
                          country.name)
                         for country in pycountry.countries
                         if ' ' in country.name]
 all_country_initials = dict(all_country_initials)
 all_country_names += list(all_country_initials.keys())
+
 
 def process_row(row, row_index,
                 spec, resource_index,
@@ -26,7 +28,9 @@ def process_row(row, row_index,
             return
         clean_value_code = None
         clean_value_name = None
-        ret = fw_process.extractOne(raw_field_value, all_country_names, score_cutoff=80)
+        ret = fw_process.extractOne(raw_field_value,
+                                    all_country_names,
+                                    score_cutoff=80)
         if ret is not None:
             country, score = ret
             if country in all_country_initials:

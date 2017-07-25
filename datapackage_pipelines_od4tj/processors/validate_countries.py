@@ -2,6 +2,7 @@ from datapackage_pipelines.wrapper import ingest, spew
 
 parameters, dp, res_iter = ingest()
 
+
 def process_resource(rows, missing_values):
     raw_field = parameters['raw_field']
     clean_field = parameters['clean_field']
@@ -39,6 +40,7 @@ def modify_datapackage(dp, *_):
         }
     })
     return dp
+
 
 if __name__ == '__main__':
     dp = modify_datapackage(dp)

@@ -19,6 +19,7 @@ headers = parameters['headers']
 HEADER_SEARCH_ROWS = 10
 SCORE_THRESHOLD = 80
 
+
 def fetch_pdf_file():
     url = parameters['url']
     delete_after_extract = False

@@ -61,8 +61,8 @@ class Generator(GeneratorBase):
                     },
                     'fields': dict(
                         (h['mapping'], [])
-                        for h in item['model']['headers'] +
-                                 [{'mapping':'url'}, {'mapping': 'page'}]
+                        for h in (item['model']['headers'] +
+                                  [{'mapping': 'url'}, {'mapping': 'page'}])
                     )
                 }
             })

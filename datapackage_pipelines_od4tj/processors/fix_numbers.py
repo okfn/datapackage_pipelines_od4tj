@@ -29,18 +29,17 @@ def process_row(row, row_index,
 
         if value:
             try:
-                value = _convert_to_number(value, parameters.get('group_char'), parameters.get('decimal_char'))
+                value = _convert_to_number(value,
+                                           parameters.get('group_char'),
+                                           parameters.get('decimal_char'))
             except (ValueError, AttributeError):
                 raise
                 value = None
             else:
                 value = _apply_factor(value, parameters.get('factor'))
 
-        logging.warning('Processing "{}" with value "{}".Altering to "{}"'.format(
-            field,
-            original_value,
-            value
-        ))
+        logging.warning('Processing "{}" with value "{}".Altering to "{}"'
+                        .format(field, original_value, value))
 
         row[field] = value
 
@@ -74,7 +73,9 @@ def _remove_null_values(value):
 
 def _convert_to_number(value, group_char=',', decimal_char='.'):
     if isinstance(value, str):
-        value = value.replace(group_char or ',', '').replace(decimal_char or '.', '.')
+        value = value\
+            .replace(group_char or ',', '')\
+            .replace(decimal_char or '.', '.')
 
     numeric_value = float(value)
 
@@ -97,6 +98,7 @@ def modify_datapackage(dp, *_):
             if field['name'] in NUMERIC_FIELDS:
                 field['type'] = 'number'
     return dp
+
 
 process(modify_datapackage=modify_datapackage,
         process_row=process_row)
