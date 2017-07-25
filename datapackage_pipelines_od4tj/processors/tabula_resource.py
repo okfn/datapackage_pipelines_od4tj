@@ -48,7 +48,7 @@ def tabula_extract(extractor):
     dimensions = parameters['dimensions']
     tabula_params['pages'] = dimensions['page']
     # Warning: `spreadsheet=False` doesn't have the same effect as `nospreadsheet=True`
-    if dimensions.get('extraction_method') == 'lattice':
+    if dimensions.get('extraction_method') == 'spreadsheet':
         tabula_params['spreadsheet'] = True
     else:
         tabula_params['nospreadsheet'] = True
