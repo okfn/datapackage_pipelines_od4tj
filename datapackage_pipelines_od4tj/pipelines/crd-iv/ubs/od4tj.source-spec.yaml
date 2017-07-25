@@ -1,0 +1,64 @@
+-  
+  # Year
+  year: 2015
+  # EntityName
+  entity: UBS
+  inputs:
+    # Path to the PDF you uploaded in the project
+    - url: ./2015_ubs.pdf
+      kind: pdf
+      parameters:
+        # Paste the dimensions of the selection you made in Tabula
+        dimensions: 
+                [
+                  {
+                    "page": 1,
+                    "extraction_method": "stream",
+                    "selection_id": "I1500902853135",
+                    "x1": 36.463350448608395,
+                    "x2": 555.135906829834,
+                    "y1": 236.63970291137693,
+                    "y2": 370.58670455932617,
+                    "width": 518.6725563812256,
+                    "height": 133.9470016479492,
+                    "spec_index": 0
+                  },
+                  {
+                    "page": 1,
+                    "extraction_method": "stream",
+                    "selection_id": "T1500902858031",
+                    "x1": 38.69580047607422,
+                    "x2": 555.135906829834,
+                    "y1": 380.26065467834474,
+                    "y2": 514.2076563262939,
+                    "width": 516.4401063537597,
+                    "height": 133.9470016479492,
+                    "spec_index": 1
+                  }
+                ]
+
+  processing:
+    totals:
+      turnover: 735227
+      profit_before_tax: 188568
+      subsidies_received: 174
+      corporation_tax_paid: 8685
+      full_time_equivalents: 27
+      
+  model:
+    currency: gbp
+    factor: 1000
+    # Define the fields of the table in order they appear in the table
+    headers:
+      - title: Country split
+        mapping: country
+      - title: Turnover (Standalone)
+        mapping: turnover
+      - title: Profit Before Tax (Standalone)
+        mapping: profit_before_tax
+      - title: Consolidation Eliminations
+        mapping: subsidies_received
+      - title: Corporation tax paid
+        mapping: corporate_tax_paid
+      - title: Employees
+        mapping: full_time_equivalents   
