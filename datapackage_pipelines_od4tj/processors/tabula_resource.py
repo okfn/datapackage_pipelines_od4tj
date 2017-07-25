@@ -4,13 +4,20 @@ import shutil
 import tempfile
 
 import itertools
+
+import logging
 import tabula
 import requests
+
+from fuzzywuzzy import fuzz
 
 from datapackage_pipelines.wrapper import ingest, spew
 
 parameters, dp, res_iter = ingest()
-header_names = [h['name'] for h in parameters['headers']]
+headers = parameters['headers']
+
+HEADER_SEARCH_ROWS = 10
+SCORE_THRESHOLD = 80
 
 
 def fetch_pdf_file():
@@ -53,22 +60,55 @@ def tabula_extract(extractor):
     ]
     r = tabula.read_pdf(filename, **tabula_params)
     data = r[0]['data']
-    data = [dict(zip(header_names, [cell['text'] for cell in row])) for row in data]
+    data = [[cell['text'] for cell in row] for row in data]
+    if parameters['transpose']:
+        data = list(map(list, zip(*data)))
+
+    num_columns = len(data[0])
+    column_for_header = {}
+    for header in headers:
+        scores = [0] * num_columns
+        logging.info('LOOKING %r for title %r', header['mapping'], header['title'])
+        for row in data[:HEADER_SEARCH_ROWS]:
+            for col in range(num_columns):
+                scores[col] += 1 if fuzz.partial_ratio(row[col], header['title']) > SCORE_THRESHOLD else 0
+        maxcol, maxscore = max(enumerate(scores), key=lambda x: x[1])
+        logging.info('HEADER %r got column %d', header['mapping'], maxcol)
+        assert maxcol not in column_for_header, \
+            "header %r and %r mapped to same column %d" % (header, column_for_header[maxcol], maxcol)
+        assert maxscore > 0, "Failed to find column for header %r" % header
+        column_for_header[maxcol] = header['mapping']
+
+    data = [dict((column_for_header[i], x)
+                 for i, x in enumerate(row)
+                 if i in column_for_header)
+            for row in data]
+    for row in data:
+        row['url'] = parameters['url']
+        row['page'] = dimensions['page']
     list(extractor)
     return data
 
 
 def modify_datapackage(dp):
     fields = parameters['headers']
-    for f in fields:
-        f['type'] = f.get('type', 'string')
     resource = {
         'name': 'tabula-' + parameters['dimensions']['selection_id'].lower(),
         'path': 'data/{}.csv'.format(parameters['dimensions']['selection_id']),
         'schema': {
-            'fields': fields
+            'fields': [
+                {
+                    'name': f['mapping'],
+                    'type': 'string'
+                }
+                for f in fields
+            ]
         }
     }
+    resource['schema']['fields'].extend([
+        {'name': 'url', 'type': 'string'},
+        {'name': 'page', 'type': 'integer'},
+    ])
     dp['resources'].append(resource)
     return dp
 

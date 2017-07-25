@@ -1,0 +1,83 @@
+concatenate:
+  pipeline:
+    - run: add_metadata
+      parameters:
+        name: all_crd_iv_data
+        title: CRD/IV data extracted from PDF tables
+    - run: od4tj.collect_sources
+      parameters:
+        bucket: od4tj-filestore.okfn.org
+        path: crd_iv_datapackages/
+        suffix: crdiv_data.csv
+    - run: stream_remote_resources
+    - run: concatenate
+      parameters:
+        target:
+          name: all_crd_iv_data
+          path: data/all_crd_iv_data.csv
+        fields:
+          entity: []
+          page: []
+          url: []
+          currency: []
+
+          year: []
+
+          country: []
+          turnover: []
+          profit_before_tax: []
+          corporate_tax_paid: []
+          full_time_equivalents: []
+          deferred_tax: []
+          subsidies_received: []
+
+    - run: set_types
+      parameters:
+        types:
+          turnover: {'type': 'number'}
+          profit_before_tax: {'type': 'number'}
+          corporate_tax_paid: {'type': 'number'}
+          full_time_equivalents: {'type': 'number'}
+          deferred_tax: {'type': 'number'}
+          subsidies_received: {'type': 'number'}
+
+    - run: dump.to_sql
+      parameters:
+        engine: env://DPP_DB_ENGINE
+        tables:
+          all_crd_iv:
+            resource-name: all_crd_iv_data
+            mode: rewrite
+    - run: aws.dump.to_s3
+      parameters:
+          bucket: od4tj-filestore.okfn.org
+          path: all_crd_iv
+
+concatenate-missing-countries:
+  pipeline:
+    - run: add_metadata
+      parameters:
+        name: missing_countries_from_crdiv_data
+        title: Country mismatches from CRD/IV data
+    - run: od4tj.collect_sources
+      parameters:
+        bucket: od4tj-filestore.okfn.org
+        path: crd_iv_datapackages/
+        suffix: missing_countries.csv
+    - run: stream_remote_resources
+    - run: concatenate
+      parameters:
+        target:
+          name: all_missing_countries
+          path: data/all_missing_countries.csv
+        fields:
+          entity: []
+          year: []
+          missing_value: []
+    - run: dump.to_sql
+      parameters:
+        engine: env://DPP_DB_ENGINE
+        tables:
+          all_missing_data:
+            resource-name: all_missing_countries
+            mode: rewrite

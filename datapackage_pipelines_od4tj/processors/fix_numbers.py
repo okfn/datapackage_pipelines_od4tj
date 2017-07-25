@@ -3,16 +3,23 @@ import logging
 from datapackage_pipelines.wrapper import process
 
 
+NUMERIC_FIELDS = [
+    "turnover",
+    "profit_before_tax",
+    "corporate_tax_paid",
+    "full_time_equivalents",
+    "deferred_tax",
+    "subsidies_received"
+]
+
+
 def process_row(row, row_index,
                 spec, resource_index,
                 parameters, stats):
-    numeric_fields = [
-        field for field in spec['schema']['fields']
-        if field.get('type') == 'number'
-    ]
-    for field in numeric_fields:
-        name = field['name']
-        value = row[name]
+    for field in NUMERIC_FIELDS:
+        value = row.get(field)
+        if value is None:
+            continue
 
         original_value = value
 
@@ -22,19 +29,19 @@ def process_row(row, row_index,
 
         if value:
             try:
-                value = _convert_to_number(value, field.get('groupChar'))
+                value = _convert_to_number(value,
+                                           parameters.get('group_char'),
+                                           parameters.get('decimal_char'))
             except (ValueError, AttributeError):
+                raise
                 value = None
             else:
-                value = _apply_factor(value, field.get('factor'))
+                value = _apply_factor(value, parameters.get('factor'))
 
-        logging.warn('Processing "{}" with value "{}".Altering to "{}"'.format(
-            name,
-            original_value,
-            value
-        ))
+        logging.warning('Processing "{}" with value "{}".Altering to "{}"'
+                        .format(field, original_value, value))
 
-        row[name] = value
+        row[field] = value
 
     return row
 
@@ -64,9 +71,11 @@ def _remove_null_values(value):
     return value
 
 
-def _convert_to_number(value, group_char=','):
+def _convert_to_number(value, group_char=',', decimal_char='.'):
     if isinstance(value, str):
-        value = value.replace(group_char or ',', '').replace(',', '.')
+        value = value\
+            .replace(group_char or ',', '')\
+            .replace(decimal_char or '.', '.')
 
     numeric_value = float(value)
 
@@ -77,13 +86,19 @@ def _convert_to_number(value, group_char=','):
 
 
 def _apply_factor(value, factor):
-    if value and factor:
-        multiplier = {
-            '1m': 1000000
-        }[factor]
-        value *= multiplier
-
+    if not isinstance(factor, int):
+        raise KeyError()
+    value *= factor
     return value
 
 
-process(process_row=process_row)
+def modify_datapackage(dp, *_):
+    for resource in dp['resources']:
+        for field in resource['schema']['fields']:
+            if field['name'] in NUMERIC_FIELDS:
+                field['type'] = 'number'
+    return dp
+
+
+process(modify_datapackage=modify_datapackage,
+        process_row=process_row)

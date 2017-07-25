@@ -7,5 +7,6 @@ RUN pip install tabula-py
 ADD . /app
 WORKDIR /app
 RUN pip install .
+RUN python add_pipeline_dependencies.py
 
 CMD ["server"]
