@@ -3,7 +3,7 @@ from datapackage_pipelines.wrapper import ingest, spew
 parameters, dp, res_iter = ingest()
 
 def process_resource(rows, missing_countries):
-    raw_field = parameters['raw_field'],
+    raw_field = parameters['raw_field']
     clean_field = parameters['clean_field']
 
     missing_values = []
