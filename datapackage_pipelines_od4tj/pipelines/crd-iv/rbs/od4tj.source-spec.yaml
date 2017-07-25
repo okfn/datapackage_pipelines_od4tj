@@ -65,25 +65,27 @@
                             "spec_index": 4
                         }
                       ]
-  processing: {}
+  processing:
+    totals: 
+      turnover: 15150
+      profit_before_tax: 2643
+      corporation_tax_paid: 179
+      subsidies_received: 0
+      full_time_equivalents:94641
+      
   model:
+    currency: gbp
+    factor: 1000000
     headers:
-      - name: country
-      - name: income
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: profit_before_tax
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: corporation_tax_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: subsidies
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: full_time_equivalents
-        type: number
+      - title: Country
+        mapping: country
+      - title: Income
+        mapping: turnover
+      - title: Profit/(loss) before tax
+        mapping: profit_before_tax
+      - title: Corporation/Income tax paid/ (received)
+        mapping: corporation_tax_paid
+      - title: Subsidies received
+        mapping: subsidies_received
+      - title: Headcount
+        mapping: full_time_equivalents
