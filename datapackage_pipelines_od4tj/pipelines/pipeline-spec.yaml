@@ -17,30 +17,29 @@ concatenate:
           path: data/all_crd_iv_data.csv
         fields:
           entity: []
+          page: []
+          url: []
+          currency: []
+
           year: []
+
           country: []
-
-          revenues: []
-          turnover: ['net_banking_income', 'income', 'income_before_tax']
-          total_tax_paid: ['corporation_tax_paid', 'income_tax', 'tax_on_profit', 'tax_on_profit_2014']
-          subsidies: []
+          turnover: []
+          profit_before_tax: []
+          corporate_tax_paid: []
           full_time_equivalents: []
-
-          profit_before_tax: ['profit_before_tax_2014']
           deferred_tax: []
+          subsidies_received: []
 
     - run: set_types
       parameters:
         types:
-          revenues: {'type': 'number'}
           turnover: {'type': 'number'}
-          total_tax_paid: {'type': 'number'}
-          subsidies: {'type': 'number'}
-          full_time_equivalents: {'type': 'number'}
-
           profit_before_tax: {'type': 'number'}
+          corporate_tax_paid: {'type': 'number'}
+          full_time_equivalents: {'type': 'number'}
           deferred_tax: {'type': 'number'}
-
+          subsidies_received: {'type': 'number'}
 
     - run: dump.to_sql
       parameters:
