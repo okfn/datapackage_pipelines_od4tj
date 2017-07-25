@@ -45,44 +45,18 @@
                     ]
   processing: {}
   model:
+    currency: gbp
+    factor: 1m
     headers:
-      - name: country
-      - name: commentary
-      - name: turnover
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: profit_before_tax
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: total_tax_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: corporation_tax_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: social_security_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: vat_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: bank_levy_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: other_taxes_paid
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: subsidies
-        type: number
-        currency: gbp
-        factor: 1m
-      - name: full_time_equivalents
-        type: number
+      - title: Country
+        name: country
+      - title: Turnover
+        name: turnover
+      - title: Profit/(loss) before tax
+        name: profit_before_tax
+      - title: Corporation tax paid
+        name: corporate_tax_paid
+      - title: Public subsidies received
+        name: subsidies_received
+      - title: Average number of employees
+        name: full_time_equivalents
