@@ -43,7 +43,9 @@
                           "y2": 368.90125
                       }
                     ]
-  processing: {}
+  processing:
+    totals:
+      turnover: 30570
   model:
     currency: gbp
     factor: 1000000

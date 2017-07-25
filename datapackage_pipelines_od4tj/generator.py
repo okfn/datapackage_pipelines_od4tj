@@ -104,6 +104,13 @@ class Generator(GeneratorBase):
                 {
                     'run': 'set_types',
                 },
+                {
+                    'run': 'od4tj.validate_totals',
+                    'parameters': {
+                        'totals': item.get('processing', {}).get('totals', {}),
+                        'factor': item['model']['factor'],
+                    }
+                },
             ])
             pipeline.append({
                 'run': 'aws.dump.to_s3',
