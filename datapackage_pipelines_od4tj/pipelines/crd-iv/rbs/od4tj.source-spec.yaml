@@ -71,7 +71,7 @@
       profit_before_tax: 2643
       corporate_tax_paid: 179
       subsidies_received: 0
-      full_time_equivalent:94641
+      full_time_equivalent: 94641
       
   model:
     currency: gbp
