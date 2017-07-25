@@ -17,20 +17,30 @@ concatenate:
           path: data/all_crd_iv_data.csv
         fields:
           entity: []
+          page: []
+          url: []
+          currency: []
+
           year: []
+
           country: []
-          revenues: []
           turnover: []
-          net_banking_income: []
-          profit_before_tax: ['profit_before_tax_2014']
-          income_before_tax: []
-          total_tax_paid: []
-          income_tax: []
-          tax_on_profit: ['tax_on_profit_2014']
-          corporation_tax_paid: []
-          deferred_tax: []
-          subsidies: []
+          profit_before_tax: []
+          corporate_tax_paid: []
           full_time_equivalents: []
+          deferred_tax: []
+          subsidies_received: []
+
+    - run: set_types
+      parameters:
+        types:
+          turnover: {'type': 'number'}
+          profit_before_tax: {'type': 'number'}
+          corporate_tax_paid: {'type': 'number'}
+          full_time_equivalents: {'type': 'number'}
+          deferred_tax: {'type': 'number'}
+          subsidies_received: {'type': 'number'}
+
     - run: dump.to_sql
       parameters:
         engine: env://DPP_DB_ENGINE
@@ -53,7 +63,7 @@ concatenate-missing-countries:
       parameters:
         bucket: od4tj-filestore.okfn.org
         path: crd_iv_datapackages/
-        suffix: missing-countries.csv
+        suffix: missing_countries.csv
     - run: stream_remote_resources
     - run: concatenate
       parameters:
@@ -63,7 +73,7 @@ concatenate-missing-countries:
         fields:
           entity: []
           year: []
-          missing-country: []
+          missing_value: []
     - run: dump.to_sql
       parameters:
         engine: env://DPP_DB_ENGINE
