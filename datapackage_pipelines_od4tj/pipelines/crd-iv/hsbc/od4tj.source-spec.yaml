@@ -31,7 +31,7 @@
                           "spec_index": 1
                       }
                     ]
-  processing: {}
+  processing:
     totals:
         turnover: 47966
         full_time_equivalents: 245526
