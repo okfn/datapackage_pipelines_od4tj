@@ -1,0 +1,89 @@
+-
+  year: 2014
+  entity: Royal Bank of Scotland
+  inputs:
+    - url: ./2014_rbs_tax_breakdown.pdf
+      kind: pdf
+      parameters:
+        dimensions: [
+                      {
+                          "extraction_method": "lattice",
+                          "selection_id": "Y1500972246943",
+                          "page": 1,
+                          "x1": 55.00001023518853,
+                          "x2": 595.3193141292315,
+                          "y1": 136.99998886724936,
+                          "y2": 263.3189814819954,
+                          "width": 540.319303894043,
+                          "height": 126.3189926147461,
+                          "spec_index": 0
+                      },
+                      {
+                          "extraction_method": "lattice",
+                          "selection_id": "N1500972246950",
+                          "page": 1,
+                          "x1": 62.00000204178505,
+                          "x2": 590.0948872956914,
+                          "y1": 276.99999909368347,
+                          "y2": 632.3231009003241, "width":528.0948852539062,
+                          "height": 355.32310180664064,
+                          "spec_index": 1
+                      },
+                      {
+                          "extraction_method": "lattice",
+                          "selection_id": "X1500972246954",
+                          "page": 1,
+                          "x1": 62.00000204178505,
+                          "x2": 590.0948872956914,
+                          "y1": 645.999989985209,
+                          "y2": 689.1929358470254,
+                          "width": 528.0948852539062,
+                          "height": 43.19294586181641,
+                          "spec_index": 2
+                        },
+                        {
+                            "extraction_method": "lattice",
+                            "selection_id": "B1500972246959",
+                            "x1": 62.00000204178505,
+                            "x2": 590.0948872956914,
+                            "y1": 162.00000934638084,
+                            "y2": 333.1418703082949,
+                            "width": 528.0948852539062,
+                            "height": 171.14186096191406,
+                            "spec_index": 3
+                        },
+                        {
+                            "page": 2,
+                            "extraction_method": "lattice",
+                            "selection_id": "K1500972246963",
+                            "x1": 62.00000204178505,
+                            "x2": 590.0948872956914,
+                            "y1": 347.9999906010926,
+                            "y2": 489.80324682667856,
+                            "width": 528.0948852539062,
+                            "height": 141.80325622558595,
+                            "spec_index": 4
+                        }
+                      ]
+  processing: {}
+  model:
+    headers:
+      - name: country
+      - name: income
+        type: number
+        currency: gbp
+        factor: 1m
+      - name: profit_before_tax
+        type: number
+        currency: gbp
+        factor: 1m
+      - name: corporation_tax_paid
+        type: number
+        currency: gbp
+        factor: 1m
+      - name: subsidies
+        type: number
+        currency: gbp
+        factor: 1m
+      - name: full_time_equivalents
+        type: number
