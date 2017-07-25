@@ -31,7 +31,7 @@
                           "y2": 506.24976768493656
                       }
                     ]
-  processing: {}
+  processing:
     totals:
         turnover: 23257
         profit_before_tax: 5925
