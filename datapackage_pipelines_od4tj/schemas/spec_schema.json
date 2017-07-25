@@ -89,7 +89,12 @@
             "type": "string"
           },
           "factor": {
-            "type": "string"
+            "type": "integer",
+            "enum": [
+              1,
+              1000,
+              1000000
+            ]
           },
           "headers": {
             "type": "array",
@@ -97,15 +102,17 @@
               "type": "object",
               "properties": {
                 "title": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Original column name from the PDF table"
                 },
                 "mapping": {
                   "type": "string",
+                  "description": "The equivalent column name of `title`",
                   "enum": [
                     "country",
                     "turnover",
                     "profit_before_tax",
-                    "tax_paid",
+                    "corporate_tax_paid",
                     "full_time_equivalents",
                     "deferred_tax",
                     "subsidies_received"
@@ -123,4 +130,3 @@
     }
   }
 }
-
