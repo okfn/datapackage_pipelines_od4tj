@@ -37,30 +37,28 @@
                   }
                 ]
 
-  processing: {}
+  processing:
+    totals:
+      turnover: 735227
+      profit_before_tax: 188568
+      subsidies_received: 174
+      corporation_tax_paid: 8685
+      full_time_equivalents: 27
+      
   model:
+    currency: gbp
+    factor: 1000
     # Define the fields of the table in order they appear in the table
     headers:
-      # `string` type is default
-      - name: country
-      - name: turnover
-        type: number
-        currency:gbp
-        factor: 1000
-      - name: profit_before_tax
-        type: number
-        currency: gbp
-        factor: 1000
-      - name: consolidation_eliminations
-        type: number
-        currency: gbp
-        factor: 1000
-      - name: profit_before_tax_consolidated
-        type: number
-        currency: gbp
-        factor: 1000
-      - name: corporation_tax_paid
-        type: number
-        factor:1000
-      - name: employees
-        type: number    
+      - title: Country split
+        mapping: country
+      - title: Turnover (Standalone)
+        mapping: turnover
+      - title: Profit Before Tax (Standalone)
+        mapping: profit_before_tax
+      - title: Consolidation Eliminations
+        mapping: subsidies_received
+      - title: Corporation tax paid
+        mapping: corporate_tax_paid
+      - title: Employees
+        mapping: full_time_equivalents   
