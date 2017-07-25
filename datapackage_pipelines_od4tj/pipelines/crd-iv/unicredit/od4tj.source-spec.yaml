@@ -4,8 +4,8 @@
   inputs:
     - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
       kind: pdf
-      transpose: true
-      skip_empty_cells: true
+#      transpose: true
+#      skip_empty_cells: true
       parameters:
           dimensions: [
                         {
@@ -55,31 +55,23 @@
   model:
     currency: eur
     factor: 1000
+    group_char: "."
+    decimal_char: ","
     headers:
       - title: ITALY
-        mapping:: country
+        mapping: country
 
       - title: Turnover
-        mapping:: turnover
-        groupChar: "."
-        decimalChar: ","
+        mapping: turnover
 
       - title: Number of employees on a full time equivalent basis
-        mapping:: full_time_equivalents
-        groupChar: "."
-        decimalChar: ","
+        mapping: full_time_equivalents
 
       - title: Profit or loss before tax
-        mapping:: profit_before_tax
-        groupChar: "."
-        decimalChar: ","
+        mapping: profit_before_tax
 
       - title: Tax on profit or loss
-        mapping:: corporate_tax_paid
-        groupChar: "."
-        decimalChar: ","
+        mapping: corporate_tax_paid
 
       - title: Public subsidies received
-        mapping:: subsidies_received
-        groupChar: "."
-        decimalChar: ","
+        mapping: subsidies_received

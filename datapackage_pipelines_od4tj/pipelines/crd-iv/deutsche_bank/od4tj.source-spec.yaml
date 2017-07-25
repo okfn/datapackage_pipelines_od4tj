@@ -19,7 +19,7 @@
                           "y2": 701.2435279846192
                       }
                     ]
-  processing:
+  processing: {}
   model:
     currency: eur
     factor: 1000000

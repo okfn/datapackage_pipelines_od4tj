@@ -25,7 +25,8 @@
                           "x1": 62.00000204178505,
                           "x2": 590.0948872956914,
                           "y1": 276.99999909368347,
-                          "y2": 632.3231009003241, "width":528.0948852539062,
+                          "y2": 632.3231009003241,
+                          "width":528.0948852539062,
                           "height": 355.32310180664064,
                           "spec_index": 1
                       },
@@ -71,7 +72,7 @@
       profit_before_tax: 2643
       corporate_tax_paid: 179
       subsidies_received: 0
-      full_time_equivalent: 94641
+      full_time_equivalents: 94641
       
   model:
     currency: gbp
@@ -88,4 +89,4 @@
       - title: Subsidies received
         mapping: subsidies_received
       - title: Headcount
-        mapping: full_time_equivalent
+        mapping: full_time_equivalents
