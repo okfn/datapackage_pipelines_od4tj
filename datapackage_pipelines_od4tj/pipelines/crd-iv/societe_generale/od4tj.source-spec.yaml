@@ -31,29 +31,29 @@
                           "y2": 440.82280780792235
                       }
                     ]
-  processing: {}
+  processing:
+    totals:
+        full_time_equivalents: 136223
+        turnover: 23561
+        profit_before_tax: 4375
+        corporate_tax_paid: -1192
+        deferred_tax: -192
+        subsidies_received: 0
   model:
+    currency: eur
+    factor: 1000000
     headers:
-      - name: country
-      - name: full_time_equivalents
-        type: number
-      - name: net_banking_income
-        type: number
-        currency: eur
-        factor: 1m
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1m
-      - name: deferred_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1m
+      - title: Country
+        mapping: country
+      - title: Staff
+        mapping: full_time_equivalents
+      - title: NBI
+        mapping: turnover
+      - title: Earnings before corporate tax
+        mapping: profit_before_tax
+      - title: Corporate tax
+        mapping: corporate_tax_paid
+      - title: Deferred corporate tax
+        mapping: deferred_tax
+      - title: Subsidies
+        mapping: subsidies_received

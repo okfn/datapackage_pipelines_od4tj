@@ -45,7 +45,11 @@
                     ]
   processing:
     totals:
-      turnover: 30570
+        turnover: 30962
+        subsidies_received: 2
+        profit_before_tax: 5536
+        corporate_tax_paid: -1026
+        full_time_equivalents: 135336
   model:
     currency: gbp
     factor: 1000000

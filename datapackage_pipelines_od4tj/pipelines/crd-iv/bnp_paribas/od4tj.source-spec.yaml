@@ -31,31 +31,29 @@
                             "y2": 443.8526682281494
                         }
                     ]
-  processing: {}
+  processing:
+    totals:
+        turnover: 39168
+        subsidies_received: 0
+        profit_before_tax: 2741
+        deferred_tax: -8
+        corporate_tax_paid: -2642
+        full_time_equivalents: 179603
   model:
+    currency: eur
+    factor: 1000000
     headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1m
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1m
-      - name: income_before_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1m
-      - name: deferred_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: corporation_tax_paid
-        type: number
-        currency: eur
-        factor: 1m
+      - title: Germany
+        mapping: country
+      - title: Revenues
+        mapping: turnover
+      - title: Public subsidies received
+        mapping: subsidies_received
+      - title: Income before tax
+        mapping: profit_before_tax
+      - title: Deferred Taxes
+        mapping: deferred_tax
+      - title: Corporate income tax
+        mapping: corporate_tax_paid
+      - title: Financial headcount
+        mapping: full_time_equivalents

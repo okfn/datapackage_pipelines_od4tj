@@ -32,20 +32,22 @@
                       }
                     ]
   processing: {}
+    totals:
+        turnover: 47966
+        full_time_equivalents: 245526
+        profit_before_tax: 7112
+        corporate_tax_paid: 3242
   model:
+    currency: usd
+    factor: 1000000
     headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: usd
-        factor: 1m
-      - name: full_time_equivalents
-        type: number
-      - name: profit_before_tax
-        type: number
-        currency: usd
-        factor: 1m
-      - name: total_tax_paid
-        type: number
-        currency: usd
-        factor: 1m
+      - title: Egypt
+        mapping: country
+      - title: Turnover
+        mapping: turnover
+      - title: Average FTE
+        mapping: full_time_equivalents
+      - title: Profit/(loss) before tax
+        mapping: profit_before_tax
+      - title: Corporation tax paid/(refunded)
+        mapping: corporate_tax_paid
