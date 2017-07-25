@@ -74,7 +74,36 @@
         }
       },
       "processing": {
-        "type": "object"
+        "type": "object",
+        "properties": {
+          "totals": {
+            "type": "object",
+            "properties": {
+              "totals": {
+                "properties": {
+                  "turnover": {
+                    "type": "number"
+                  },
+                  "profit_before_tax": {
+                    "type": "number"
+                  },
+                  "corporate_tax_paid": {
+                    "type": "number"
+                  },
+                  "deferred_tax": {
+                    "type": "number"
+                  },
+                  "subsidies_received": {
+                    "type": "number"
+                  },
+                  "full_time_equivalents": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       "model": {
         "type": "object",

@@ -32,20 +32,22 @@
                       }
                     ]
   processing: {}
+    totals:
+        turnover: 23257
+        profit_before_tax: 5925
+        corporate_tax_paid: -1913
+        full_time_equivalents: 103199
   model:
+    currency: eur
+    factor: 1000000
     headers:
-      - name: country
-      - name: net_banking_income
-        type: number
-        currency: eur
-        factor: 1m
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: income_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: full_time_equivalents
-        type: number
+      - title: Germany
+        mapping: country
+      - title: Net banking income
+        mapping: turnover
+      - title: Profit or loss before tax
+        mapping: profit_before_tax
+      - title: Income tax
+        mapping: corporate_tax_paid
+      - title: FTE headcount
+        mapping: full_time_equivalents

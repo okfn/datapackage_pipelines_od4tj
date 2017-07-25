@@ -19,29 +19,23 @@
                           "y2": 558.0675
                       }
                     ]
-  processing: {}
+  processing:
+    totals:
+        turnover: 57069
+        full_time_equivalents: 178772
+        profit_before_tax: 18376
+        corporate_tax_paid: 1352
   model:
+    currency: eur
+    factor: 1000000
     headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1m
-      - name: full_time_equivalents
-        type: number
-      - name: profit_before_tax_2014
-        type: number
-        currency: eur
-        factor: 1m
-      - name: tax_on_profit_2014
-        type: number
-        currency: eur
-        factor: 1m
-      - name: profit_before_tax_2013
-        type: number
-        currency: eur
-        factor: 1m
-      - name: tax_on_profit_2013
-        type: number
-        currency: eur
-        factor: 1m
+      - title: Jurisdiction
+        mapping: country
+      - title: Turnover
+        mapping: turnover
+      - title: Number of employees
+        mapping: full_time_equivalents
+      - title: Operating profit/(loss) before tax
+        mapping: profit_before_tax
+      - title: Tax on profit or loss
+        mapping: corporate_tax_paid

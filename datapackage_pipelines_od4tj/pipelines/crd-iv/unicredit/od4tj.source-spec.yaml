@@ -7,253 +7,79 @@
       transpose: true
       skip_empty_cells: true
       parameters:
-        dimensions: [{"page":2,"extraction_method":"spreadsheet","selection_id":"Y1500909078468","x1":148.80499267578125,"x2":502.9608752441406,"y1":102.99983983032224,"y2":242.1325079821777,"width":354.15588256835935,"height":139.13266815185546,"spec_index":0},{"page":2,"extraction_method":"spreadsheet","selection_id":"L1500909078474","x1":147.31694274902344,"x2":502.9608752441406,"y1":254.99967569885254,"y2":391.1562439971924,"width":355.64393249511716,"height":136.15656829833983,"spec_index":1},{"page":2,"extraction_method":"spreadsheet","selection_id":"E1500909078479","x1":147.31694274902344,"x2":502.9608752441406,"y1":405.0003164907837,"y2":538.1807849356079,"width":355.64393249511716,"height":133.1804684448242,"spec_index":2},{"page":2,"extraction_method":"spreadsheet","selection_id":"T1500909078484","x1":148.06096771240234,"x2":180.7980661010742,"y1":551.0003350546265,"y2":684.9248284628296,"width":32.737098388671875,"height":133.92449340820312,"spec_index":3}]
-  processing: {}
+          dimensions: [
+                        {
+                          "page": 2,
+                          "extraction_method": "spreadsheet",
+                          "selection_id": "Y1500909078468",
+                          "x1": 148.80499267578,
+                          "x2": 502.96087524414,
+                          "y1": 102.99983983032,
+                          "y2": 242.13250798218,
+                          "width": 354.15588256836,
+                          "height": 139.13266815186,
+                          "spec_index": 0
+                        },
+                        {
+                          "page": 2,
+                          "extraction_method": "spreadsheet",
+                          "selection_id": "L1500909078474",
+                          "x1": 147.31694274902,
+                          "x2": 502.96087524414,
+                          "y1": 254.99967569885,
+                          "y2": 391.15624399719,
+                          "width": 355.64393249512,
+                          "height": 136.15656829834,
+                          "spec_index": 1
+                        },
+                        {
+                          "page": 2,
+                          "extraction_method": "spreadsheet",
+                          "selection_id": "E1500909078479",
+                          "x1": 147.31694274902,
+                          "x2": 502.96087524414,
+                          "y1": 405.00031649078,
+                          "y2": 538.18078493561,
+                          "width": 355.64393249512,
+                          "height": 133.18046844482,
+                          "spec_index": 2
+                        }
+                      ]
+  processing:
+    totals:
+      turnover: 21320199,
+      full_time_equivalents: 125356
+      profit_before_tax: 3534366
+      corporate_tax_paid: -1167242
+      subsidies_received: 7542629
   model:
+    currency: eur
+    factor: 1000
     headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1k
+      - title: ITALY
+        mapping:: country
+
+      - title: Turnover
+        mapping:: turnover
         groupChar: "."
         decimalChar: ","
 
-      - name: full_time_equivalents
-        type: number
-        currency: eur
-        factor: 1k
+      - title: Number of employees on a full time equivalent basis
+        mapping:: full_time_equivalents
         groupChar: "."
         decimalChar: ","
 
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
+      - title: Profit or loss before tax
+        mapping:: profit_before_tax
         groupChar: "."
         decimalChar: ","
 
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1k
-
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
+      - title: Tax on profit or loss
+        mapping:: corporate_tax_paid
         groupChar: "."
         decimalChar: ","
 
--
-  year: 2014
-  entity: Unicredit
-  subsidiary: banks
-  inputs:
-    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
-      kind: pdf
-      transpose: true
-      skip_empty_cells: true
-      parameters:
-        dimensions: [{"page":3,"extraction_method":"spreadsheet","selection_id":"Z1500909287099","x1":149.54901763916016,"x2":504.4489251708984,"y1":79.61067108154296,"y2":209.81503967285155,"width":354.8999075317383,"height":130.2043685913086,"spec_index":0},{"page":3,"extraction_method":"spreadsheet","selection_id":"W1500909287106","x1":151.78109252929687,"x2":508.91307495117184,"y1":220.97541412353516,"y2":345.9716079711914,"width":357.13198242187497,"height":124.99619384765624,"spec_index":1}]
-  processing: {}
-  model:
-    headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: full_time_equivalents
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1k
-
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
--
-  year: 2014
-  entity: Unicredit
-  subsidiary: financial-institutions
-  inputs:
-    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
-      kind: pdf
-      transpose: true
-      skip_empty_cells: true
-      parameters:
-        dimensions:  [{"page":4,"extraction_method":"spreadsheet","selection_id":"A1500909976337","x1":147.31694274902344,"x2":504.4489251708984,"y1":78.86664611816406,"y2":197.91064025878904,"width":357.13198242187497,"height":119.04399414062499,"spec_index":0},{"page":4,"extraction_method":"spreadsheet","selection_id":"A1500909984157","x1":145.82889282226563,"x2":502.2168502807617,"y1":209.81503967285155,"y2":332.57915863037107,"width":356.3879574584961,"height":122.76411895751953,"spec_index":1},{"page":4,"extraction_method":"spreadsheet","selection_id":"Q1500909989282","x1":145.82889282226563,"x2":471.7118267822265,"y1":343.7395330810547,"y2":464.2715771484375,"width":325.88293395996095,"height":120.53204406738281,"spec_index":2}]
-  processing: {}
-  model:
-    headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: full_time_equivalents
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1k
-
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
--
-  year: 2014
-  entity: Unicredit
-  subsidiary: insurance
-  inputs:
-    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
-      kind: pdf
-      transpose: true
-      skip_empty_cells: true
-      parameters:
-        dimensions: [{"page":5,"extraction_method":"basic","selection_id":"N1500910161839","x1":142.85279296875,"x2":276.7772863769531,"y1":78.12262115478515,"y2":200.8867401123047,"width":133.92449340820312,"height":122.76411895751953,"spec_index":0}]
-  processing: {}
-  model:
-    headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: full_time_equivalents
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1k
-
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-
--
-  year: 2014
-  entity: Unicredit
-  subsidiary: non-financial-institutions
-  inputs:
-    - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
-      kind: pdf
-      transpose: true
-      skip_empty_cells: true
-      parameters:
-        dimensions: [{"page":5,"extraction_method":"spreadsheet","selection_id":"N1500910288816","x1":141.36474304199217,"x2":502.2168502807617,"y1":215.7672393798828,"y2":340.0194082641601,"width":360.8521072387695,"height":124.25216888427734,"spec_index":0},{"page":5,"extraction_method":"spreadsheet","selection_id":"R1500910288822","x1":143.5968179321289,"x2":340.76343322753905,"y1":351.1797827148437,"y2":466.5036520385742,"width":197.16661529541014,"height":115.32386932373046,"spec_index":1}]
-  processing: {}
-  model:
-    headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: full_time_equivalents
-        type: number
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
-        groupChar: "."
-        decimalChar: ","
-
-      - name: total_tax_paid
-        type: number
-        currency: eur
-        factor: 1k
-
-      - name: subsidies
-        type: number
-        currency: eur
-        factor: 1k
-        currency: eur
-        factor: 1k
+      - title: Public subsidies received
+        mapping:: subsidies_received
         groupChar: "."
         decimalChar: ","

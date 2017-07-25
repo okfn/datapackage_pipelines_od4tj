@@ -19,21 +19,18 @@
                           "y2": 701.2435279846192
                       }
                     ]
-  processing: {}
+  processing:
   model:
+    currency: eur
+    factor: 1000000
     headers:
-      - name: country
-      - name: turnover
-        type: number
-        currency: eur
-        factor: 1m
-      - name: full_time_equivalents
-        type: number
-      - name: profit_before_tax
-        type: number
-        currency: eur
-        factor: 1m
-      - name: income_tax
-        type: number
-        currency: eur
-        factor: 1m
+      - title: Argentina
+        mapping: country
+      - title: Net revenues (Turnover)
+        mapping: turnover
+      - title: Employees (full-time equivalent)
+        mapping: full_time_equivalents
+      - title: Income (loss) before income taxes
+        mapping: profit_before_tax
+      - title: Income tax (expense)/benefit
+        mapping: corporate_tax_paid
