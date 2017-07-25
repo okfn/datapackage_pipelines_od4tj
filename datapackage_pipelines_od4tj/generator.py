@@ -67,7 +67,6 @@ class Generator(GeneratorBase):
                 }
             })
             pipeline.extend([
-                { 'run': 'od4tj.sample' },
                 {
                     'run': 'od4tj.clean_locations',
                     'parameters': {

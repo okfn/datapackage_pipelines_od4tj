@@ -2,11 +2,9 @@ from datapackage_pipelines.wrapper import ingest, spew
 
 parameters, dp, res_iter = ingest()
 
-def process_resource(rows, missing_countries):
+def process_resource(rows, missing_values):
     raw_field = parameters['raw_field']
     clean_field = parameters['clean_field']
-
-    missing_values = []
 
     for row in rows:
         if row[clean_field]:
@@ -23,9 +21,9 @@ def process_resource(rows, missing_countries):
 
 def process_resources(resources):
     first = next(resources)
-    missing_countries = []
-    yield process_resource(first, missing_countries)
-    yield missing_countries
+    missing_values = []
+    yield process_resource(first, missing_values)
+    yield missing_values
 
 
 def modify_datapackage(dp, *_):
