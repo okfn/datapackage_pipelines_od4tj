@@ -69,9 +69,9 @@
     totals: 
       turnover: 15150
       profit_before_tax: 2643
-      corporation_tax_paid: 179
+      corporate_tax_paid: 179
       subsidies_received: 0
-      full_time_equivalents:94641
+      full_time_equivalent:94641
       
   model:
     currency: gbp
@@ -84,8 +84,8 @@
       - title: Profit/(loss) before tax
         mapping: profit_before_tax
       - title: Corporation/Income tax paid/ (received)
-        mapping: corporation_tax_paid
+        mapping: corporate_tax_paid
       - title: Subsidies received
         mapping: subsidies_received
       - title: Headcount
-        mapping: full_time_equivalents
+        mapping: full_time_equivalent
