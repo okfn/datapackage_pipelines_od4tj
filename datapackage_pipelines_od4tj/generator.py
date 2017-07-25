@@ -26,17 +26,16 @@ class Generator(GeneratorBase):
     def generate_pipeline(cls, source):
         for item in source:
             entity_slug = slugify(item['entity'], to_lower=True, separator='_')
-            pipeline_id = '{}/{}'.format(entity_slug, item['year'])
-            dataset_name = '{}_{}'.format(entity_slug, item['year'])
+            ids = [entity_slug, item['year']]
             if 'subsidiary' in item:
-                pipeline_id += '/{}'.format(item['subsidiary'])
-                dataset_name += '_{}'.format(item['subsidiary'])
+                ids.append(item['subsidiary'])
+            pipeline_id = '_'.join(str(i) for i in ids)
 
             pipeline = [
                 {
                     'run': 'add_metadata',
                     'parameters': {
-                        'name': dataset_name,
+                        'name': pipeline_id,
                         'title': 'CRD/IV data for {entity} in the year {year}'.format(**item)
                     },
                 },
@@ -47,7 +46,6 @@ class Generator(GeneratorBase):
                         parameters = {}
                         parameters['dimensions'] = dimension
                         parameters['transpose'] = input.get('transpose', False)
-                        parameters['skip_empty_cells'] = input.get('skip_empty_cells', False)
                         parameters['url'] = input['url']
                         parameters['headers'] = item['model']['headers']
                         pipeline.append({
@@ -62,12 +60,14 @@ class Generator(GeneratorBase):
                         'name': 'crdiv_data'
                     },
                     'fields': dict(
-                        (h['name'], [])
-                        for h in item['model']['headers']
+                        (h['mapping'], [])
+                        for h in item['model']['headers'] +
+                                 [{'mapping':'url'}, {'mapping': 'page'}]
                     )
                 }
             })
             pipeline.extend([
+                { 'run': 'od4tj.sample' },
                 {
                     'run': 'od4tj.clean_locations',
                     'parameters': {
@@ -82,7 +82,8 @@ class Generator(GeneratorBase):
                     'parameters': {
                         'year': item['year'],
                         'entity': item['entity'],
-                        'subsidiary': item.get('subsidiary')
+                        'subsidiary': item.get('subsidiary'),
+                        'currency': item['model']['currency'].upper()
                     }
                 },
                 {
@@ -95,6 +96,11 @@ class Generator(GeneratorBase):
                 },
                 {
                     'run': 'od4tj.fix_numbers',
+                    'parameters': {
+                        'factor': item['model']['factor'],
+                        'group_char': item['model'].get('group_char', ','),
+                        'decimal_char': item['model'].get('decimal_char', '.'),
+                    }
                 },
                 {
                     'run': 'set_types',

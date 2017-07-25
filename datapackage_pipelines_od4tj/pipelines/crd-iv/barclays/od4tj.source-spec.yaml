@@ -49,14 +49,14 @@
     factor: 1000000
     headers:
       - title: Country
-        name: country
+        mapping: country
       - title: Turnover
-        name: turnover
+        mapping: turnover
       - title: Profit/(loss) before tax
-        name: profit_before_tax
+        mapping: profit_before_tax
       - title: Corporation tax paid
-        name: corporate_tax_paid
+        mapping: corporate_tax_paid
       - title: Public subsidies received
-        name: subsidies_received
+        mapping: subsidies_received
       - title: Average number of employees
-        name: full_time_equivalents
+        mapping: full_time_equivalents
