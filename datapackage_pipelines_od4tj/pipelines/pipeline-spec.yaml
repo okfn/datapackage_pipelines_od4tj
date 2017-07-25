@@ -64,7 +64,7 @@ concatenate-missing-countries:
       parameters:
         bucket: od4tj-filestore.okfn.org
         path: crd_iv_datapackages/
-        suffix: missing-countries.csv
+        suffix: missing_countries.csv
     - run: stream_remote_resources
     - run: concatenate
       parameters:
@@ -74,7 +74,7 @@ concatenate-missing-countries:
         fields:
           entity: []
           year: []
-          missing-country: []
+          missing_value: []
     - run: dump.to_sql
       parameters:
         engine: env://DPP_DB_ENGINE
