@@ -40,25 +40,6 @@ class Generator(GeneratorBase):
                         'title': 'CRD/IV data for {entity} in the year {year}'.format(**item)
                     },
                 },
-                {
-                    'run': 'add_resource',
-                    'parameters': {
-                        'name': 'country-codes',
-                        'url': 'https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv'
-                    },
-                },
-                {
-                    'run': 'stream_remote_resources',
-                },
-                {
-                    'run': 'od4tj.prepare_country_fingerprints',
-                    'parameters': {
-                        'resource-name': 'country-codes',
-                        'source-fields': ['name', 'official_name_en', 'official_name_fr'],
-                        'name-field': 'name',
-                        'fingerprint-field': 'fingerprint'
-                    }
-                }
             ]
             for input in item['inputs']:
                 if input['kind'] == 'pdf':
@@ -88,31 +69,12 @@ class Generator(GeneratorBase):
             })
             pipeline.extend([
                 {
-                    'run': 'od4tj.fingerprint_countries',
+                    'run': 'od4tj.clean_locations',
                     'parameters': {
-                        'resource-name': 'crdiv_data',
-                        'name-field': 'country',
-                        'fingerprint-field': 'country-name-fingerprint'
-                    }
-                },
-                {
-                    'run': 'join',
-                    'parameters': {
-                        'source': {
-                            'name': 'country-codes',
-                            'key': ['fingerprint'],
-                            'delete': True
-                        },
-                        'target': {
-                            'name': 'crdiv_data',
-                            'key': ['country-name-fingerprint'],
-                        },
-                        'fields': {
-                            'country_name': {
-                                'name': 'name'
-                            }
-                        },
-                        'full': True,
+                        'resource_name': 'crdiv_data',
+                        'raw_field': 'country',
+                        'clean_field_code': 'country_code',
+                        'clean_field_name': 'country_name',
                     }
                 },
                 {
@@ -124,7 +86,12 @@ class Generator(GeneratorBase):
                     }
                 },
                 {
-                    'run': 'od4tj.validate_countries'
+                    'run': 'od4tj.validate_countries',
+                    'parameters': {
+                        'resource_name': 'crdiv_data',
+                        'raw_field': 'country',
+                        'clean_field': 'country_code',
+                    }
                 },
                 {
                     'run': 'od4tj.fix_numbers',

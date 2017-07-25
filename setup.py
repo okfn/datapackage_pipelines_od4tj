@@ -23,6 +23,7 @@ INSTALL_REQUIRES = [
     'tabula-py',
     'boto',
     'datapackage-pipelines-aws',
+    'pycountry',
 ]
 TESTS_REQUIRES = [
     'tox',
