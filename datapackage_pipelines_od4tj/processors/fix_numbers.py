@@ -85,6 +85,8 @@ def _convert_to_number(value, group_char=',', decimal_char='.'):
 
 
 def _apply_factor(value, factor):
+    if not isinstance(factor, int):
+        raise KeyError()
     value *= factor
     return value
 

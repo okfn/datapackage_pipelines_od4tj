@@ -23,6 +23,7 @@ INSTALL_REQUIRES = [
     'tabula-py',
     'boto',
     'datapackage-pipelines-aws',
+    'fuzzywuzzy',
     'pycountry',
 ]
 TESTS_REQUIRES = [
