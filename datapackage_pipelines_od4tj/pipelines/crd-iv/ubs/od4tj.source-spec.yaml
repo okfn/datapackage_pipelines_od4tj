@@ -5,7 +5,7 @@
   entity: UBS
   inputs:
     # Path to the PDF you uploaded in the project
-    - url: ./2015_ubs.pdf
+    - url: ./2015-ubs.pdf
       kind: pdf
       parameters:
         # Paste the dimensions of the selection you made in Tabula
