@@ -42,16 +42,14 @@ class Generator(GeneratorBase):
             ]
             for input in item['inputs']:
                 if input['kind'] == 'pdf':
-                    for dimension in input['parameters']['dimensions']:
-                        parameters = {}
-                        parameters['dimensions'] = dimension
-                        parameters['transpose'] = input.get('transpose', False)
-                        parameters['url'] = input['url']
-                        parameters['headers'] = item['model']['headers']
-                        pipeline.append({
-                            'run': 'od4tj.tabula_resource',
-                            'parameters': parameters
-                        })
+                    parameters = input['parameters']
+                    parameters['transpose'] = input.get('transpose', False)
+                    parameters['url'] = input['url']
+                    parameters['headers'] = item['model']['headers']
+                    pipeline.append({
+                        'run': 'od4tj.tabula_resource',
+                        'parameters': parameters
+                    })
             pipeline.append({
                 'run': 'concatenate',
                 'parameters': {
@@ -61,8 +59,7 @@ class Generator(GeneratorBase):
                     },
                     'fields': dict(
                         (h['mapping'], [])
-                        for h in (item['model']['headers'] +
-                                  [{'mapping': 'url'}, {'mapping': 'page'}])
+                        for h in (item['model']['headers'] + [{'mapping': 'url'}])
                     )
                 }
             })

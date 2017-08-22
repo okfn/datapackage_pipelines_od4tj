@@ -43,6 +43,7 @@
                           "spec_index": 2
                         },
                         {
+                            "page": 2,
                             "extraction_method": "lattice",
                             "selection_id": "B1500972246959",
                             "x1": 62.00000204178505,
@@ -67,13 +68,13 @@
                         }
                       ]
   processing:
-    totals: 
+    totals:
       turnover: 15150
       profit_before_tax: 2643
       corporate_tax_paid: 179
       subsidies_received: 0
       full_time_equivalents: 94641
-      
+
   model:
     currency: gbp
     factor: 1000000
