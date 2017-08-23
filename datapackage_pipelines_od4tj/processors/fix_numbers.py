@@ -65,6 +65,7 @@ def _remove_null_values(value):
     if isinstance(value, str):
         if value.strip() in (
             '-',
+            '–',
             '',
         ):
             value = None

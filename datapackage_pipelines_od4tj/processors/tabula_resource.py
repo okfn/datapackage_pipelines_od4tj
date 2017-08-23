@@ -1,5 +1,6 @@
 # pylama:ignore=E501
 import os
+import re
 import shutil
 import tempfile
 
@@ -28,6 +29,8 @@ def columns_for_headers(resource):
         logging.info('LOOKING %r for title %r', header['mapping'], header['title'])
         for row in resource:
             for col in range(num_columns):
+                row_value = re.sub(r'-\r|\n', '', row[col])
+                row_value = re.sub(r'\s', ' ', row_value)
                 scores[col] += 1 if fuzz.partial_ratio(row[col], header['title']) > SCORE_THRESHOLD else 0
         maxcol, maxscore = max(enumerate(scores), key=lambda x: x[1])
         logging.info('HEADER %r got column %d', header['mapping'], maxcol)
@@ -68,7 +71,7 @@ def tabula_extract(extractor):
     for selection in dimensions:
         tabula_params['pages'] = selection['page']
         # Warning: `spreadsheet=False` doesn't have the same effect as `nospreadsheet=True`
-        if selection.get('extraction_method') == 'spreadsheet':
+        if selection.get('extraction_method') == 'spreadsheet' or selection.get('extraction_method') == 'lattice':
             tabula_params['spreadsheet'] = True
         else:
             tabula_params['nospreadsheet'] = True
@@ -109,7 +112,7 @@ def modify_datapackage(dp):
     fields = parameters['headers']
     filename = os.path.splitext(os.path.basename(parameters['url']))[0]
     resource = {
-        'name': 'tabula-{}'.format(filename.lower()),
+        'name': 'tabula-{}'.format(re.sub(r'\s', '', filename.lower())),
         'path': 'data/{}.csv'.format(filename),
         'schema': {
             'fields': [
