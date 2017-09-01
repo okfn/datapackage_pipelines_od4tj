@@ -4,8 +4,7 @@
   inputs:
     - url: https://www.unicreditgroup.eu/content/dam/unicreditgroup-eu/documents/en/investors/financial-reports/2014/CbC_Disclosure_Dec-31-2014-ENG-version-to-publish.pdf
       kind: pdf
-#      transpose: true
-#      skip_empty_cells: true
+      transpose: true
       parameters:
           dimensions: [
                         {

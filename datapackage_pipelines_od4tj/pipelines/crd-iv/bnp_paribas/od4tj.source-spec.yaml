@@ -7,28 +7,26 @@
       parameters:
         dimensions: [
                         {
-                            "extraction_method": "stream",
-                            "height": 486.6381307983399,
                             "page": 488,
-                            "selection_id": "Y1500448029091",
-                            "spec_index": 0,
-                            "width": 235.1340203857422,
-                            "x1": 68.08469261169434,
-                            "x2": 303.2187129974365,
-                            "y1": 190.86036781311037,
-                            "y2": 677.4984986114503
+                            "extraction_method": "lattice",
+                            "selection_id": "J1503436112051",
+                            "x1": 69.9449301147461,
+                            "x2": 299.8702854919434,
+                            "y1": 161.45931407515974,
+                            "y2": 677.8612449223277,
+                            "width": 229.92535537719726,
+                            "height": 516.401930847168
                         },
                         {
-                            "extraction_method": "stream",
-                            "height": 252.24820541381837,
                             "page": 488,
-                            "selection_id": "P1500448040115",
-                            "spec_index": 1,
-                            "width": 235.8781153869629,
-                            "x1": 319.588803024292,
-                            "x2": 555.4669184112549,
-                            "y1": 191.60446281433107,
-                            "y2": 443.8526682281494
+                            "extraction_method": "lattice",
+                            "selection_id": "R1503436112072",
+                            "x1": 320.7049455261231,
+                            "x2": 555.0948709106445,
+                            "y1": 161.45931407515974,
+                            "y2": 445.70360454146834,
+                            "width": 234.3899253845215,
+                            "height": 284.2442904663086
                         }
                     ]
   processing:
@@ -51,9 +49,9 @@
         mapping: subsidies_received
       - title: Income before tax
         mapping: profit_before_tax
-      - title: Deferred Taxes
+      - title: Deferred taxes
         mapping: deferred_tax
       - title: Corporate income tax
         mapping: corporate_tax_paid
-      - title: Financial headcount
+      - title: Financial headcount(**) as at 31 December
         mapping: full_time_equivalents

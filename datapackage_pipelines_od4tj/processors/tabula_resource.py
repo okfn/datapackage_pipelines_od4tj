@@ -1,5 +1,6 @@
 # pylama:ignore=E501
 import os
+import re
 import shutil
 import tempfile
 
@@ -18,6 +19,26 @@ headers = parameters['headers']
 
 HEADER_SEARCH_ROWS = 10
 SCORE_THRESHOLD = 80
+
+
+def columns_for_headers(resource):
+    num_columns = len(resource[0])
+    columns_for_headers = {}
+    for header in parameters['headers']:
+        scores = [0] * num_columns
+        logging.info('LOOKING %r for title %r', header['mapping'], header['title'])
+        for row in resource:
+            for col in range(num_columns):
+                row_value = re.sub(r'-\r|\n', '', row[col])
+                row_value = re.sub(r'\s', ' ', row_value)
+                scores[col] += 1 if fuzz.partial_ratio(row[col], header['title']) > SCORE_THRESHOLD else 0
+        maxcol, maxscore = max(enumerate(scores), key=lambda x: x[1])
+        logging.info('HEADER %r got column %d', header['mapping'], maxcol)
+        assert maxcol not in columns_for_headers, \
+            "header %r and %r mapped to same column %d" % (header, columns_for_headers[maxcol], maxcol)
+        assert maxscore > 0, "Failed to find column for header %r" % header
+        columns_for_headers[maxcol] = header['mapping']
+    return columns_for_headers
 
 
 def fetch_pdf_file():
@@ -45,56 +66,54 @@ def tabula_extract(extractor):
         'guess': False,
         'output_format': 'json',
     }
+    data = []
     dimensions = parameters['dimensions']
-    tabula_params['pages'] = dimensions['page']
-    # Warning: `spreadsheet=False` doesn't have the same effect as `nospreadsheet=True`
-    if dimensions.get('extraction_method') == 'spreadsheet':
-        tabula_params['spreadsheet'] = True
-    else:
-        tabula_params['nospreadsheet'] = True
-    tabula_params['area'] = [
-        dimensions['y1'],
-        dimensions['x1'],
-        dimensions['y2'],
-        dimensions['x2'],
-    ]
-    r = tabula.read_pdf(filename, **tabula_params)
-    data = r[0]['data']
-    data = [[cell['text'] for cell in row] for row in data]
-    if parameters['transpose']:
-        data = list(map(list, zip(*data)))
-
-    num_columns = len(data[0])
-    column_for_header = {}
-    for header in headers:
-        scores = [0] * num_columns
-        logging.info('LOOKING %r for title %r', header['mapping'], header['title'])
-        for row in data[:HEADER_SEARCH_ROWS]:
-            for col in range(num_columns):
-                scores[col] += 1 if fuzz.partial_ratio(row[col], header['title']) > SCORE_THRESHOLD else 0
-        maxcol, maxscore = max(enumerate(scores), key=lambda x: x[1])
-        logging.info('HEADER %r got column %d', header['mapping'], maxcol)
-        assert maxcol not in column_for_header, \
-            "header %r and %r mapped to same column %d" % (header, column_for_header[maxcol], maxcol)
-        assert maxscore > 0, "Failed to find column for header %r" % header
-        column_for_header[maxcol] = header['mapping']
-
-    data = [dict((column_for_header[i], x)
-                 for i, x in enumerate(row)
-                 if i in column_for_header)
-            for row in data]
-    for row in data:
-        row['url'] = parameters['url']
-        row['page'] = dimensions['page']
-    list(extractor)
+    for selection in dimensions:
+        tabula_params['pages'] = selection['page']
+        # Warning: `spreadsheet=False` doesn't have the same effect as `nospreadsheet=True`
+        if selection.get('extraction_method') == 'spreadsheet' or selection.get('extraction_method') == 'lattice':
+            tabula_params['spreadsheet'] = True
+        else:
+            tabula_params['nospreadsheet'] = True
+        tabula_params['area'] = [
+            selection['y1'],
+            selection['x1'],
+            selection['y2'],
+            selection['x2'],
+        ]
+        r = tabula.read_pdf(parameters['url'], **tabula_params)
+        selection_data = r[0]['data']
+        selection_data = [[cell['text'] for cell in row] for row in selection_data]
+        if parameters['transpose']:
+            selection_data = list(map(list, zip(*selection_data)))
+        data.extend(selection_data)
     return data
+
+
+def add_headers(resource, extracted_headers):
+    new_resource = []
+    for row in resource:
+        new_row = {}
+        for index, value in enumerate(row):
+            if index in extracted_headers:
+                new_row[extracted_headers[index]] = value
+        new_row['url'] = parameters['url']
+        new_resource.append(new_row)
+    return new_resource
+
+
+def process_resource():
+    resource_data = tabula_extract(fetch_pdf_file())
+    resource_headers = columns_for_headers(resource_data)
+    return add_headers(resource_data, resource_headers)
 
 
 def modify_datapackage(dp):
     fields = parameters['headers']
+    filename = os.path.splitext(os.path.basename(parameters['url']))[0]
     resource = {
-        'name': 'tabula-' + parameters['dimensions']['selection_id'].lower(),
-        'path': 'data/{}.csv'.format(parameters['dimensions']['selection_id']),
+        'name': 'tabula-{}'.format(re.sub(r'\s', '', filename.lower())),
+        'path': 'data/{}.csv'.format(filename),
         'schema': {
             'fields': [
                 {
@@ -107,11 +126,9 @@ def modify_datapackage(dp):
     }
     resource['schema']['fields'].extend([
         {'name': 'url', 'type': 'string'},
-        {'name': 'page', 'type': 'integer'},
     ])
     dp['resources'].append(resource)
     return dp
 
 
-spew(modify_datapackage(dp),
-     itertools.chain(res_iter, [tabula_extract(fetch_pdf_file())]))
+spew(modify_datapackage(dp), itertools.chain(res_iter, [process_resource()]))
